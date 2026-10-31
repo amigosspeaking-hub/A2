@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula Internacional Plus 2 — قارئ A2.1</title>
+<style>
+@font-face{font-family:Amiri;src:url(fonts/Amiri-Bold.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Tajawal;src:url(fonts/Tajawal-Regular.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Tajawal;src:url(fonts/Tajawal-Medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Tajawal;src:url(fonts/Tajawal-Bold.woff2) format('woff2');font-weight:700;font-display:swap}
+:root{--bg:#FAF8F4;--ink:#232E29;--line:#E9E3D6;--soft:#F7F4ED;--gold:#A9700F;--gold2:#7A5209;
+--navy:#14456E;--red:#CD1719;--card:#FFF;--muted:#6B736E}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Tajawal,'Segoe UI',Tahoma,sans-serif;font-size:15.5px;line-height:1.75}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.top{position:sticky;top:0;z-index:40;background:rgba(250,248,244,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(4px)}
+.top1{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 16px 6px;max-width:1060px;margin:0 auto;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px}
+.brand i{font-style:normal;color:var(--gold)}
+.brand small{display:block;font-size:11px;color:var(--muted);font-weight:500}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 10px;max-width:1060px;margin:0 auto}
+.tab{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 14px;font-size:13px;font-weight:700;color:#4A544E}
+.tab .es{font-size:11.5px;color:var(--muted);font-weight:500;direction:ltr;unicode-bidi:isolate}
+.tab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tab.on .es{color:#BCD3E6}
+.oa,.od{direction:ltr;unicode-bidi:isolate}
+.acard .ans{direction:ltr;unicode-bidi:isolate;text-align:left}
+.minibar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 16px;max-width:1060px;margin:0 auto}
+.mbbrand{font-size:13.5px;font-weight:700;color:var(--ink)}
+.mbbrand i{color:var(--gold);font-style:normal;font-weight:800}
+.mbinst{display:inline-block;margin-inline-start:10px;color:var(--gold);font-family:Amiri,'Times New Roman',serif;font-size:16px;font-weight:700;letter-spacing:.3px}
+.mbinfo{flex:1;text-align:center;font-size:12.5px;color:var(--muted);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mbinfo b{color:var(--ink);font-weight:700}
+.mbinfo .esb{direction:ltr;unicode-bidi:isolate;text-align:left;display:inline-block;max-width:60%;vertical-align:bottom}
+.mbinfo .pgno{color:var(--muted);font-weight:700}
+.mbinfo .role{display:inline-block;padding:0 7px;border-radius:99px;font-size:11px;font-weight:700;vertical-align:1px}
+.mbinfo .role.h{background:#E8EFF6;color:var(--navy)}
+.mbinfo .role.b{background:#F8EED9;color:var(--gold2)}
+.mbinfo .role.e{background:#E7F2E4;color:#2F6B33}
+.mbinfo .more{color:var(--muted);font-weight:700}
+.od.trb{font-size:10px;padding:0 5px}
+.od.vid{background:#F8EED9;border-color:var(--gold);color:var(--gold2);font-size:10.5px}
+body.chrome-off #chrome{display:none}
+.pg{display:none}
+.pg.on{display:block}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.tbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 11px;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#3C4641}
+.tbtn.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.tbtn svg{width:17px;height:17px}
+.tray{display:none;border-top:1px dashed var(--line);background:var(--soft);padding:9px 16px 11px}
+.tray.open{display:block}
+.trayin{max-width:1060px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tray .lb{font-size:13px;font-weight:700;color:var(--gold2);margin-inline-end:4px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 12px;font-size:13.5px;font-weight:700;color:var(--navy);direction:ltr;unicode-bidi:isolate}
+.chip.alt{color:var(--muted);border-style:dashed;font-weight:500;font-size:12.5px}
+.chip.play{background:var(--navy);border-color:var(--navy);color:#fff}
+.stage{max-width:1060px;margin:0 auto;padding:16px 14px 30px}
+.pwrap{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 10px 30px rgba(35,46,41,.07);overflow:hidden}
+.pwrap img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+/* أزرار الإجابة (صغيرة فوق النقطة) */
+.oa{position:absolute;width:46px;max-width:46px;height:18px;padding:0 3px;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;
+background:rgba(255,255,255,.97);border:1.5px solid var(--red);color:var(--red);font-weight:700;font-size:11.5px;
+box-shadow:0 2px 6px rgba(205,23,25,.25);display:flex;align-items:center;justify-content:center;z-index:5;
+transform:translateY(-50%);line-height:1}
+.oa.on{background:var(--red);color:#fff}
+.oa:empty::before{content:"؟"}
+.ow{background:rgba(20,69,110,.94);border-color:transparent;color:#fff;font-weight:700;font-size:10px;letter-spacing:.2px}
+.ow:hover{background:#0C3455}
+/* أزرار الصوت (فوق ملصق الأوديو) */
+.od{position:absolute;height:19px;padding:0 6px;border-radius:5px;background:rgba(20,69,110,.94);
+color:#fff;font-weight:700;font-size:11.5px;letter-spacing:.3px;display:flex;align-items:center;gap:4px;z-index:5;
+box-shadow:0 2px 7px rgba(20,69,110,.35);direction:ltr;unicode-bidi:isolate;border:1px solid #0C3455}
+.od::before{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6.5px;border-color:transparent transparent transparent #fff;opacity:.95}
+.od:active{background:#0C3455}
+.od.alt{background:rgba(255,255,255,.95);color:var(--navy);border:1.5px dashed var(--navy);font-weight:600}
+.od.alt::before{display:none}
+.acard{position:absolute;z-index:6;max-width:min(60%,470px);background:var(--card);border:1px solid #E4C9C9;border-top:3px solid var(--red);
+border-radius:8px;box-shadow:0 14px 34px rgba(35,46,41,.2);padding:8px 12px 9px;display:none}
+.acard.open{display:block}
+.acard .ttl{font-size:11.5px;font-weight:700;color:var(--red);letter-spacing:.2px;margin-bottom:4px}
+.acard .ans{direction:ltr;unicode-bidi:isolate;text-align:left;font-family:Georgia,'Times New Roman',serif;font-size:14.5px;line-height:1.55;color:#1C2430;white-space:pre-wrap;word-break:break-word}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:13px 4px 2px}
+.nav .ico{width:40px;height:40px;border:1px solid var(--line);background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(35,46,41,.06)}
+.nav .ico:disabled{opacity:.35;cursor:default}
+.nav .ico svg{width:18px;height:18px}
+.nav .pos{min-width:132px;text-align:center;font-weight:700;font-size:14.5px;color:#3C4641}
+.nav .pos small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+.pg{margin:0 0 30px;scroll-margin-top:150px;position:relative}
+.pg .layer{display:contents}
+.docnav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:45;
+background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:99px;padding:6px 12px;
+gap:12px;box-shadow:0 12px 34px rgba(35,46,41,.2);backdrop-filter:blur(4px)}
+.docnav .ico{width:36px;height:36px;border:1px solid var(--line);background:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center}
+.docnav .ico:disabled{opacity:.35;cursor:default}
+.docnav .ico svg{width:16px;height:16px}
+.docnav .pos{min-width:118px;text-align:center;font-weight:700;font-size:13.5px;color:#3C4641}
+.docnav .pos small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
+@media (max-width:560px){ .docnav{bottom:8px;padding:5px 9px;gap:8px} .docnav .pos{min-width:96px;font-size:12.5px} }
+.foot{max-width:1060px;margin:0 auto;padding:0 16px 26px;color:var(--muted);font-size:12.5px;text-align:center}
+.aud{position:fixed;inset:auto 0 0 0;background:#fff;border-top:1px solid var(--line);padding:9px 16px;display:none;z-index:50;
+box-shadow:0 -8px 24px rgba(35,46,41,.1)}
+.aud.open{display:block}
+.audin{max-width:1060px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.aud .now{font-weight:700;font-size:13.5px;color:var(--navy);direction:ltr;unicode-bidi:isolate;min-width:110px}
+.aud input[type=range]{flex:1;accent-color:var(--gold)}
+.aud .tm{font-size:12.5px;color:var(--muted);direction:ltr;unicode-bidi:isolate;min-width:74px;text-align:left}
+/* إخفاء/إظهار أزرار الكتاب */
+body.hideov .oa,body.hideov .od,body.hideov .acard{display:none!important}
+/* وضع تعديل المواقع */
+body.editmode .oa,body.editmode .od{outline:2px dashed var(--gold);outline-offset:1px;cursor:grab;touch-action:none}
+body.editmode .oa:active,body.editmode .od:active{cursor:grabbing}
+body.editmode .oa.on{outline-color:var(--red)}
+body.editmode .od,body.editmode .oa{user-select:none;-webkit-user-select:none}
+.od{transition:transform .14s ease,box-shadow .14s ease}
+body.editmode .od.dragging{cursor:grabbing;transform:scale(1.07);z-index:9;box-shadow:0 8px 22px rgba(20,26,23,.35);transition:none}
+.ehint{font-size:12.5px;color:var(--muted)}
+.editbar .chip{cursor:pointer}
+/* فهرس الوحدة */
+.idxp{position:fixed;inset:0;background:rgba(35,46,41,.5);z-index:70;display:none;align-items:flex-start;justify-content:center;padding:5vh 14px}
+.idxp.open{display:flex}
+.idxin{background:var(--bg);border:1px solid var(--line);border-radius:16px;max-width:660px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 30px 70px rgba(20,26,23,.35)}
+.idxh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 18px 8px;border-bottom:1px solid var(--line)}
+.idxt{font-weight:700;font-size:16.5px;color:var(--ink)}
+.idxt::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-inline-start:8px;vertical-align:2px}
+.seg{margin-inline-start:auto;display:flex;border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px;gap:3px}
+.segb{border-radius:99px;padding:5px 13px;font-size:12.5px;font-weight:700;color:#5A635E;border:1px solid transparent}
+.segb.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.idxx{width:34px;height:34px;border:1px solid var(--line);background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.idxx svg{width:15px;height:15px}
+.idxsub{padding:10px 18px 2px;font-size:13px;line-height:1.8;color:#5A635E}
+.idxl{padding:8px 14px 18px}
+.ixr{display:flex;width:100%;align-items:center;gap:11px;text-align:start;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px;margin-top:8px}
+.ixr:hover{border-color:#D8CDB4;background:#FFFDF8}
+.ixn{min-width:30px;height:30px;border-radius:8px;background:var(--soft);border:1px solid var(--line);color:var(--gold2);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1.05}
+.ixn small{font-size:7.5px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+.ixt{flex:1;min-width:0}
+.ixt .es{display:block;direction:ltr;unicode-bidi:isolate;text-align:left;font-family:Inter,'Segoe UI',Tahoma,sans-serif;font-size:13.5px;font-weight:600;color:#2B352F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ixt small{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+.ixc{flex:0 0 auto;border-radius:99px;padding:3px 11px;font-size:11.5px;font-weight:700;border:1px solid}
+.ixc.c-h{background:#EEF4FA;color:#14456E;border-color:#CBDBEA}
+.ixc.c-b{background:#FBF3E2;color:#8A5A0B;border-color:#EBD9B4}
+.ixc.c-e{background:var(--soft);color:#6B736E;border-color:var(--line)}
+@media (max-width:560px){
+ .tbtn span{display:none}
+ .tbtn{padding:7px 9px}
+ .idxp{padding:2vh 8px}
+}
+@media (max-width:700px){
+ .brand{font-size:13.5px}
+ .tab{padding:4px 11px;font-size:12.5px}
+ .oa{height:16px;width:40px;max-width:40px;font-size:10px;padding:0 2px}
+ .od{height:16.5px;font-size:10.5px;padding:0 4px}
+ .acard{max-width:84%}
+ .nav .ico{width:36px;height:36px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="minibar">
+    <div class="mbbrand"><i>A2.1</i><span class="mbinst">Instituto Amigos</span></div>
+    <div class="mbinfo" id="mbInfo"></div>
+    <button class="tbtn" id="chromeBtn" title="إظهار/إخفاء شريط الأدوات كامل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg><span id="chromeLbl">إخفاء الشريط</span></button>
+  </div>
+  <div id="chrome">
+  <div class="top1">
+    <div class="tools">
+      <button class="tbtn" id="ansAll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg><span>كل الإجابات</span></button>
+      <button class="tbtn" id="audBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6.5 9H3v6h3.5L11 19z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a9 9 0 0 1 0 12"/></svg><span>الصوتيات</span></button>
+      <button class="tbtn" id="idxBtn" title="فهرس أنشطة الوحدة بترتيب الكتاب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3.5 6h.01"/><path d="M3.5 12h.01"/><path d="M3.5 18h.01"/></svg><span>فهرس الوحدة</span></button>
+      <button class="tbtn" id="hideBtn" title="إخفاء أزرار الإجابات والصوت من صفحات الكتاب — واضغط تاني لتظهر عادي"><svg id="eyeIc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg><span id="hideLbl">إخفاء الأزرار</span></button>
+      <button class="tbtn" id="editBtn" title="وضع تعديل مواقع الأزرار — اسحب كل زر لمكانه الصحيح"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3"/><path d="M9 5l3-3 3 3"/><path d="M15 19l-3 3-3-3"/><path d="M19 9l3 3-3 3"/><path d="M2 12h20"/><path d="M12 2v20"/></svg><span>تعديل المواقع</span></button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  </div>
+  <div class="tray" id="tray"><div class="trayin" id="trayin"></div></div>
+  <div class="tray" id="editTray"><div class="trayin">
+    <span class="lb">وضع تعديل الأزرار:</span>
+    <span class="ehint">اسحب = تحريك · دبل كليك = تعديل النص · كليك يمين = حذف · «+ إجابة» ثم دوس على الصفحة = إضافة.</span>
+    <button class="chip" id="fixAdd" title="إضافة زر إجابة جديد في مكان تدوس عليه">+ إجابة</button>
+    <button class="chip" id="fixExport">تنزيل ملف الإصلاحات</button>
+    <button class="chip" id="fixImport">استيراد إصلاحات</button>
+    <button class="chip alt" id="fixClear">مسح التعديلات</button>
+    <input type="file" id="fixFile" accept=".json,application/json" hidden>
+  </div></div>
+</div>
+
+<div class="stage" id="doc">
+<section class="pg" id="p10" data-p="10"><div class="pwrap"><img loading="lazy" alt="صفحة 10" src="pages/p010.jpg" width="1248" height="1531"><div class="layer" data-p="10"></div></div></section>
+<section class="pg" id="p11" data-p="11"><div class="pwrap"><img loading="lazy" alt="صفحة 11" src="pages/p011.jpg" width="1248" height="1531"><div class="layer" data-p="11"></div></div></section>
+<section class="pg" id="p12" data-p="12"><div class="pwrap"><img loading="lazy" alt="صفحة 12" src="pages/p012.jpg" width="1248" height="1531"><div class="layer" data-p="12"></div></div></section>
+<section class="pg" id="p13" data-p="13"><div class="pwrap"><img loading="lazy" alt="صفحة 13" src="pages/p013.jpg" width="1248" height="1531"><div class="layer" data-p="13"></div></div></section>
+<section class="pg" id="p14" data-p="14"><div class="pwrap"><img loading="lazy" alt="صفحة 14" src="pages/p014.jpg" width="1248" height="1531"><div class="layer" data-p="14"></div></div></section>
+<section class="pg" id="p15" data-p="15"><div class="pwrap"><img loading="lazy" alt="صفحة 15" src="pages/p015.jpg" width="1248" height="1531"><div class="layer" data-p="15"></div></div></section>
+<section class="pg" id="p16" data-p="16"><div class="pwrap"><img loading="lazy" alt="صفحة 16" src="pages/p016.jpg" width="1248" height="1531"><div class="layer" data-p="16"></div></div></section>
+<section class="pg" id="p17" data-p="17"><div class="pwrap"><img loading="lazy" alt="صفحة 17" src="pages/p017.jpg" width="1248" height="1531"><div class="layer" data-p="17"></div></div></section>
+<section class="pg" id="p18" data-p="18"><div class="pwrap"><img loading="lazy" alt="صفحة 18" src="pages/p018.jpg" width="1248" height="1531"><div class="layer" data-p="18"></div></div></section>
+<section class="pg" id="p19" data-p="19"><div class="pwrap"><img loading="lazy" alt="صفحة 19" src="pages/p019.jpg" width="1248" height="1531"><div class="layer" data-p="19"></div></div></section>
+<section class="pg" id="p20" data-p="20"><div class="pwrap"><img loading="lazy" alt="صفحة 20" src="pages/p020.jpg" width="1248" height="1531"><div class="layer" data-p="20"></div></div></section>
+<section class="pg" id="p21" data-p="21"><div class="pwrap"><img loading="lazy" alt="صفحة 21" src="pages/p021.jpg" width="1248" height="1531"><div class="layer" data-p="21"></div></div></section>
+<section class="pg" id="p22" data-p="22"><div class="pwrap"><img loading="lazy" alt="صفحة 22" src="pages/p022.jpg" width="1248" height="1531"><div class="layer" data-p="22"></div></div></section>
+<section class="pg" id="p23" data-p="23"><div class="pwrap"><img loading="lazy" alt="صفحة 23" src="pages/p023.jpg" width="1248" height="1531"><div class="layer" data-p="23"></div></div></section>
+<section class="pg" id="p24" data-p="24"><div class="pwrap"><img loading="lazy" alt="صفحة 24" src="pages/p024.jpg" width="1248" height="1531"><div class="layer" data-p="24"></div></div></section>
+<section class="pg" id="p25" data-p="25"><div class="pwrap"><img loading="lazy" alt="صفحة 25" src="pages/p025.jpg" width="1248" height="1531"><div class="layer" data-p="25"></div></div></section>
+<section class="pg" id="p26" data-p="26"><div class="pwrap"><img loading="lazy" alt="صفحة 26" src="pages/p026.jpg" width="1248" height="1531"><div class="layer" data-p="26"></div></div></section>
+<section class="pg" id="p27" data-p="27"><div class="pwrap"><img loading="lazy" alt="صفحة 27" src="pages/p027.jpg" width="1248" height="1531"><div class="layer" data-p="27"></div></div></section>
+<section class="pg" id="p28" data-p="28"><div class="pwrap"><img loading="lazy" alt="صفحة 28" src="pages/p028.jpg" width="1248" height="1531"><div class="layer" data-p="28"></div></div></section>
+<section class="pg" id="p29" data-p="29"><div class="pwrap"><img loading="lazy" alt="صفحة 29" src="pages/p029.jpg" width="1248" height="1531"><div class="layer" data-p="29"></div></div></section>
+<section class="pg" id="p30" data-p="30"><div class="pwrap"><img loading="lazy" alt="صفحة 30" src="pages/p030.jpg" width="1248" height="1531"><div class="layer" data-p="30"></div></div></section>
+<section class="pg" id="p31" data-p="31"><div class="pwrap"><img loading="lazy" alt="صفحة 31" src="pages/p031.jpg" width="1248" height="1531"><div class="layer" data-p="31"></div></div></section>
+<section class="pg" id="p32" data-p="32"><div class="pwrap"><img loading="lazy" alt="صفحة 32" src="pages/p032.jpg" width="1248" height="1531"><div class="layer" data-p="32"></div></div></section>
+<section class="pg" id="p33" data-p="33"><div class="pwrap"><img loading="lazy" alt="صفحة 33" src="pages/p033.jpg" width="1248" height="1531"><div class="layer" data-p="33"></div></div></section>
+<section class="pg" id="p34" data-p="34"><div class="pwrap"><img loading="lazy" alt="صفحة 34" src="pages/p034.jpg" width="1248" height="1531"><div class="layer" data-p="34"></div></div></section>
+<section class="pg" id="p35" data-p="35"><div class="pwrap"><img loading="lazy" alt="صفحة 35" src="pages/p035.jpg" width="1248" height="1531"><div class="layer" data-p="35"></div></div></section>
+<section class="pg" id="p36" data-p="36"><div class="pwrap"><img loading="lazy" alt="صفحة 36" src="pages/p036.jpg" width="1248" height="1531"><div class="layer" data-p="36"></div></div></section>
+<section class="pg" id="p37" data-p="37"><div class="pwrap"><img loading="lazy" alt="صفحة 37" src="pages/p037.jpg" width="1248" height="1531"><div class="layer" data-p="37"></div></div></section>
+<section class="pg" id="p38" data-p="38"><div class="pwrap"><img loading="lazy" alt="صفحة 38" src="pages/p038.jpg" width="1248" height="1531"><div class="layer" data-p="38"></div></div></section>
+<section class="pg" id="p39" data-p="39"><div class="pwrap"><img loading="lazy" alt="صفحة 39" src="pages/p039.jpg" width="1248" height="1531"><div class="layer" data-p="39"></div></div></section>
+<section class="pg" id="p40" data-p="40"><div class="pwrap"><img loading="lazy" alt="صفحة 40" src="pages/p040.jpg" width="1248" height="1531"><div class="layer" data-p="40"></div></div></section>
+<section class="pg" id="p41" data-p="41"><div class="pwrap"><img loading="lazy" alt="صفحة 41" src="pages/p041.jpg" width="1248" height="1531"><div class="layer" data-p="41"></div></div></section>
+<section class="pg" id="p42" data-p="42"><div class="pwrap"><img loading="lazy" alt="صفحة 42" src="pages/p042.jpg" width="1248" height="1531"><div class="layer" data-p="42"></div></div></section>
+<section class="pg" id="p43" data-p="43"><div class="pwrap"><img loading="lazy" alt="صفحة 43" src="pages/p043.jpg" width="1248" height="1531"><div class="layer" data-p="43"></div></div></section>
+<section class="pg" id="p44" data-p="44"><div class="pwrap"><img loading="lazy" alt="صفحة 44" src="pages/p044.jpg" width="1248" height="1531"><div class="layer" data-p="44"></div></div></section>
+<section class="pg" id="p45" data-p="45"><div class="pwrap"><img loading="lazy" alt="صفحة 45" src="pages/p045.jpg" width="1248" height="1531"><div class="layer" data-p="45"></div></div></section>
+<section class="pg" id="p46" data-p="46"><div class="pwrap"><img loading="lazy" alt="صفحة 46" src="pages/p046.jpg" width="1248" height="1531"><div class="layer" data-p="46"></div></div></section>
+<section class="pg" id="p47" data-p="47"><div class="pwrap"><img loading="lazy" alt="صفحة 47" src="pages/p047.jpg" width="1248" height="1531"><div class="layer" data-p="47"></div></div></section>
+<section class="pg" id="p48" data-p="48"><div class="pwrap"><img loading="lazy" alt="صفحة 48" src="pages/p048.jpg" width="1248" height="1531"><div class="layer" data-p="48"></div></div></section>
+<section class="pg" id="p49" data-p="49"><div class="pwrap"><img loading="lazy" alt="صفحة 49" src="pages/p049.jpg" width="1248" height="1531"><div class="layer" data-p="49"></div></div></section>
+<section class="pg" id="p50" data-p="50"><div class="pwrap"><img loading="lazy" alt="صفحة 50" src="pages/p050.jpg" width="1248" height="1531"><div class="layer" data-p="50"></div></div></section>
+<section class="pg" id="p51" data-p="51"><div class="pwrap"><img loading="lazy" alt="صفحة 51" src="pages/p051.jpg" width="1248" height="1531"><div class="layer" data-p="51"></div></div></section>
+<section class="pg" id="p52" data-p="52"><div class="pwrap"><img loading="lazy" alt="صفحة 52" src="pages/p052.jpg" width="1248" height="1531"><div class="layer" data-p="52"></div></div></section>
+<section class="pg" id="p53" data-p="53"><div class="pwrap"><img loading="lazy" alt="صفحة 53" src="pages/p053.jpg" width="1248" height="1531"><div class="layer" data-p="53"></div></div></section>
+<section class="pg" id="p54" data-p="54"><div class="pwrap"><img loading="lazy" alt="صفحة 54" src="pages/p054.jpg" width="1248" height="1531"><div class="layer" data-p="54"></div></div></section>
+<section class="pg" id="p55" data-p="55"><div class="pwrap"><img loading="lazy" alt="صفحة 55" src="pages/p055.jpg" width="1248" height="1531"><div class="layer" data-p="55"></div></div></section>
+<section class="pg" id="p56" data-p="56"><div class="pwrap"><img loading="lazy" alt="صفحة 56" src="pages/p056.jpg" width="1248" height="1531"><div class="layer" data-p="56"></div></div></section>
+<section class="pg" id="p57" data-p="57"><div class="pwrap"><img loading="lazy" alt="صفحة 57" src="pages/p057.jpg" width="1248" height="1531"><div class="layer" data-p="57"></div></div></section>
+<section class="pg" id="p58" data-p="58"><div class="pwrap"><img loading="lazy" alt="صفحة 58" src="pages/p058.jpg" width="1248" height="1531"><div class="layer" data-p="58"></div></div></section>
+<section class="pg" id="p59" data-p="59"><div class="pwrap"><img loading="lazy" alt="صفحة 59" src="pages/p059.jpg" width="1248" height="1531"><div class="layer" data-p="59"></div></div></section>
+<section class="pg" id="p60" data-p="60"><div class="pwrap"><img loading="lazy" alt="صفحة 60" src="pages/p060.jpg" width="1248" height="1531"><div class="layer" data-p="60"></div></div></section>
+<section class="pg" id="p61" data-p="61"><div class="pwrap"><img loading="lazy" alt="صفحة 61" src="pages/p061.jpg" width="1248" height="1531"><div class="layer" data-p="61"></div></div></section>
+<section class="pg" id="p62" data-p="62"><div class="pwrap"><img loading="lazy" alt="صفحة 62" src="pages/p062.jpg" width="1248" height="1531"><div class="layer" data-p="62"></div></div></section>
+<section class="pg" id="p63" data-p="63"><div class="pwrap"><img loading="lazy" alt="صفحة 63" src="pages/p063.jpg" width="1248" height="1531"><div class="layer" data-p="63"></div></div></section>
+<section class="pg" id="p64" data-p="64"><div class="pwrap"><img loading="lazy" alt="صفحة 64" src="pages/p064.jpg" width="1248" height="1531"><div class="layer" data-p="64"></div></div></section>
+<section class="pg" id="p65" data-p="65"><div class="pwrap"><img loading="lazy" alt="صفحة 65" src="pages/p065.jpg" width="1248" height="1531"><div class="layer" data-p="65"></div></div></section>
+<section class="pg" id="p151" data-p="151"><div class="pwrap"><img loading="lazy" alt="صفحة 151" src="pages/p151.jpg" width="1248" height="1531"><div class="layer" data-p="151"></div></div></section>
+<section class="pg" id="p152" data-p="152"><div class="pwrap"><img loading="lazy" alt="صفحة 152" src="pages/p152.jpg" width="1248" height="1531"><div class="layer" data-p="152"></div></div></section>
+<section class="pg" id="p153" data-p="153"><div class="pwrap"><img loading="lazy" alt="صفحة 153" src="pages/p153.jpg" width="1248" height="1531"><div class="layer" data-p="153"></div></div></section>
+<section class="pg" id="p154" data-p="154"><div class="pwrap"><img loading="lazy" alt="صفحة 154" src="pages/p154.jpg" width="1248" height="1531"><div class="layer" data-p="154"></div></div></section>
+<section class="pg" id="p155" data-p="155"><div class="pwrap"><img loading="lazy" alt="صفحة 155" src="pages/p155.jpg" width="1248" height="1531"><div class="layer" data-p="155"></div></div></section>
+<section class="pg" id="p156" data-p="156"><div class="pwrap"><img loading="lazy" alt="صفحة 156" src="pages/p156.jpg" width="1248" height="1531"><div class="layer" data-p="156"></div></div></section>
+<section class="pg" id="p157" data-p="157"><div class="pwrap"><img loading="lazy" alt="صفحة 157" src="pages/p157.jpg" width="1248" height="1531"><div class="layer" data-p="157"></div></div></section>
+<section class="pg" id="p158" data-p="158"><div class="pwrap"><img loading="lazy" alt="صفحة 158" src="pages/p158.jpg" width="1248" height="1531"><div class="layer" data-p="158"></div></div></section>
+<section class="pg" id="p159" data-p="159"><div class="pwrap"><img loading="lazy" alt="صفحة 159" src="pages/p159.jpg" width="1248" height="1531"><div class="layer" data-p="159"></div></div></section>
+<section class="pg" id="p160" data-p="160"><div class="pwrap"><img loading="lazy" alt="صفحة 160" src="pages/p160.jpg" width="1248" height="1531"><div class="layer" data-p="160"></div></div></section>
+<section class="pg" id="p161" data-p="161"><div class="pwrap"><img loading="lazy" alt="صفحة 161" src="pages/p161.jpg" width="1248" height="1531"><div class="layer" data-p="161"></div></div></section>
+<section class="pg" id="p162" data-p="162"><div class="pwrap"><img loading="lazy" alt="صفحة 162" src="pages/p162.jpg" width="1248" height="1531"><div class="layer" data-p="162"></div></div></section>
+<section class="pg" id="p163" data-p="163"><div class="pwrap"><img loading="lazy" alt="صفحة 163" src="pages/p163.jpg" width="1248" height="1531"><div class="layer" data-p="163"></div></div></section>
+<section class="pg" id="p164" data-p="164"><div class="pwrap"><img loading="lazy" alt="صفحة 164" src="pages/p164.jpg" width="1248" height="1531"><div class="layer" data-p="164"></div></div></section>
+<section class="pg" id="p165" data-p="165"><div class="pwrap"><img loading="lazy" alt="صفحة 165" src="pages/p165.jpg" width="1248" height="1531"><div class="layer" data-p="165"></div></div></section>
+<section class="pg" id="p166" data-p="166"><div class="pwrap"><img loading="lazy" alt="صفحة 166" src="pages/p166.jpg" width="1248" height="1531"><div class="layer" data-p="166"></div></div></section>
+<section class="pg" id="p167" data-p="167"><div class="pwrap"><img loading="lazy" alt="صفحة 167" src="pages/p167.jpg" width="1248" height="1531"><div class="layer" data-p="167"></div></div></section>
+<section class="pg" id="p168" data-p="168"><div class="pwrap"><img loading="lazy" alt="صفحة 168" src="pages/p168.jpg" width="1248" height="1531"><div class="layer" data-p="168"></div></div></section>
+<section class="pg" id="p169" data-p="169"><div class="pwrap"><img loading="lazy" alt="صفحة 169" src="pages/p169.jpg" width="1248" height="1531"><div class="layer" data-p="169"></div></div></section>
+<section class="pg" id="p170" data-p="170"><div class="pwrap"><img loading="lazy" alt="صفحة 170" src="pages/p170.jpg" width="1248" height="1531"><div class="layer" data-p="170"></div></div></section>
+<section class="pg" id="p171" data-p="171"><div class="pwrap"><img loading="lazy" alt="صفحة 171" src="pages/p171.jpg" width="1248" height="1531"><div class="layer" data-p="171"></div></div></section>
+<section class="pg" id="p172" data-p="172"><div class="pwrap"><img loading="lazy" alt="صفحة 172" src="pages/p172.jpg" width="1248" height="1531"><div class="layer" data-p="172"></div></div></section>
+<section class="pg" id="p173" data-p="173"><div class="pwrap"><img loading="lazy" alt="صفحة 173" src="pages/p173.jpg" width="1248" height="1531"><div class="layer" data-p="173"></div></div></section>
+<section class="pg" id="p174" data-p="174"><div class="pwrap"><img loading="lazy" alt="صفحة 174" src="pages/p174.jpg" width="1248" height="1531"><div class="layer" data-p="174"></div></div></section>
+<section class="pg" id="p175" data-p="175"><div class="pwrap"><img loading="lazy" alt="صفحة 175" src="pages/p175.jpg" width="1248" height="1531"><div class="layer" data-p="175"></div></div></section>
+<section class="pg" id="p176" data-p="176"><div class="pwrap"><img loading="lazy" alt="صفحة 176" src="pages/p176.jpg" width="1248" height="1531"><div class="layer" data-p="176"></div></div></section>
+<section class="pg" id="p177" data-p="177"><div class="pwrap"><img loading="lazy" alt="صفحة 177" src="pages/p177.jpg" width="1248" height="1531"><div class="layer" data-p="177"></div></div></section>
+<section class="pg" id="p178" data-p="178"><div class="pwrap"><img loading="lazy" alt="صفحة 178" src="pages/p178.jpg" width="1248" height="1531"><div class="layer" data-p="178"></div></div></section>
+<section class="pg" id="p1284" data-p="1284"><div class="pwrap"><img loading="lazy" alt="صفحة 1284" src="pages/p1284.jpg" width="1418" height="1531"><div class="layer" data-p="1284"></div></div></section>
+<section class="pg" id="p1285" data-p="1285"><div class="pwrap"><img loading="lazy" alt="صفحة 1285" src="pages/p1285.jpg" width="1418" height="1531"><div class="layer" data-p="1285"></div></div></section>
+<section class="pg" id="p1286" data-p="1286"><div class="pwrap"><img loading="lazy" alt="صفحة 1286" src="pages/p1286.jpg" width="1418" height="1531"><div class="layer" data-p="1286"></div></div></section>
+<section class="pg" id="p1287" data-p="1287"><div class="pwrap"><img loading="lazy" alt="صفحة 1287" src="pages/p1287.jpg" width="1418" height="1531"><div class="layer" data-p="1287"></div></div></section>
+<section class="pg" id="p1288" data-p="1288"><div class="pwrap"><img loading="lazy" alt="صفحة 1288" src="pages/p1288.jpg" width="1418" height="1531"><div class="layer" data-p="1288"></div></div></section>
+<section class="pg" id="p1289" data-p="1289"><div class="pwrap"><img loading="lazy" alt="صفحة 1289" src="pages/p1289.jpg" width="1418" height="1531"><div class="layer" data-p="1289"></div></div></section>
+<section class="pg" id="p1290" data-p="1290"><div class="pwrap"><img loading="lazy" alt="صفحة 1290" src="pages/p1290.jpg" width="1418" height="1531"><div class="layer" data-p="1290"></div></div></section>
+<section class="pg" id="p1291" data-p="1291"><div class="pwrap"><img loading="lazy" alt="صفحة 1291" src="pages/p1291.jpg" width="1418" height="1531"><div class="layer" data-p="1291"></div></div></section>
+<section class="pg" id="p1292" data-p="1292"><div class="pwrap"><img loading="lazy" alt="صفحة 1292" src="pages/p1292.jpg" width="1418" height="1531"><div class="layer" data-p="1292"></div></div></section>
+<section class="pg" id="p1293" data-p="1293"><div class="pwrap"><img loading="lazy" alt="صفحة 1293" src="pages/p1293.jpg" width="1418" height="1531"><div class="layer" data-p="1293"></div></div></section>
+<section class="pg" id="p1294" data-p="1294"><div class="pwrap"><img loading="lazy" alt="صفحة 1294" src="pages/p1294.jpg" width="1418" height="1531"><div class="layer" data-p="1294"></div></div></section>
+<section class="pg" id="p1295" data-p="1295"><div class="pwrap"><img loading="lazy" alt="صفحة 1295" src="pages/p1295.jpg" width="1418" height="1531"><div class="layer" data-p="1295"></div></div></section>
+<section class="pg" id="p1296" data-p="1296"><div class="pwrap"><img loading="lazy" alt="صفحة 1296" src="pages/p1296.jpg" width="1418" height="1531"><div class="layer" data-p="1296"></div></div></section>
+<section class="pg" id="p1297" data-p="1297"><div class="pwrap"><img loading="lazy" alt="صفحة 1297" src="pages/p1297.jpg" width="1418" height="1531"><div class="layer" data-p="1297"></div></div></section>
+<section class="pg" id="p1298" data-p="1298"><div class="pwrap"><img loading="lazy" alt="صفحة 1298" src="pages/p1298.jpg" width="1418" height="1531"><div class="layer" data-p="1298"></div></div></section>
+<section class="pg" id="p1299" data-p="1299"><div class="pwrap"><img loading="lazy" alt="صفحة 1299" src="pages/p1299.jpg" width="1418" height="1531"><div class="layer" data-p="1299"></div></div></section>
+<section class="pg" id="p1300" data-p="1300"><div class="pwrap"><img loading="lazy" alt="صفحة 1300" src="pages/p1300.jpg" width="1418" height="1531"><div class="layer" data-p="1300"></div></div></section>
+<section class="pg" id="p1301" data-p="1301"><div class="pwrap"><img loading="lazy" alt="صفحة 1301" src="pages/p1301.jpg" width="1418" height="1531"><div class="layer" data-p="1301"></div></div></section>
+<section class="pg" id="p1302" data-p="1302"><div class="pwrap"><img loading="lazy" alt="صفحة 1302" src="pages/p1302.jpg" width="1418" height="1531"><div class="layer" data-p="1302"></div></div></section>
+<section class="pg" id="p1303" data-p="1303"><div class="pwrap"><img loading="lazy" alt="صفحة 1303" src="pages/p1303.jpg" width="1418" height="1531"><div class="layer" data-p="1303"></div></div></section>
+<section class="pg" id="p2316" data-p="2316"><div class="pwrap"><img loading="lazy" alt="صفحة 2316" src="pages/p2316.jpg" width="1418" height="1531"><div class="layer" data-p="2316"></div></div></section>
+<section class="pg" id="p2317" data-p="2317"><div class="pwrap"><img loading="lazy" alt="صفحة 2317" src="pages/p2317.jpg" width="1418" height="1531"><div class="layer" data-p="2317"></div></div></section>
+<section class="pg" id="p2318" data-p="2318"><div class="pwrap"><img loading="lazy" alt="صفحة 2318" src="pages/p2318.jpg" width="1418" height="1531"><div class="layer" data-p="2318"></div></div></section>
+<section class="pg" id="p2320" data-p="2320"><div class="pwrap"><img loading="lazy" alt="صفحة 2320" src="pages/p2320.jpg" width="1418" height="1531"><div class="layer" data-p="2320"></div></div></section>
+<section class="pg" id="p2321" data-p="2321"><div class="pwrap"><img loading="lazy" alt="صفحة 2321" src="pages/p2321.jpg" width="1418" height="1531"><div class="layer" data-p="2321"></div></div></section>
+<section class="pg" id="p2322" data-p="2322"><div class="pwrap"><img loading="lazy" alt="صفحة 2322" src="pages/p2322.jpg" width="1418" height="1531"><div class="layer" data-p="2322"></div></div></section>
+<section class="pg" id="p2323" data-p="2323"><div class="pwrap"><img loading="lazy" alt="صفحة 2323" src="pages/p2323.jpg" width="1418" height="1531"><div class="layer" data-p="2323"></div></div></section>
+<section class="pg" id="p2324" data-p="2324"><div class="pwrap"><img loading="lazy" alt="صفحة 2324" src="pages/p2324.jpg" width="1418" height="1531"><div class="layer" data-p="2324"></div></div></section>
+<section class="pg" id="p2325" data-p="2325"><div class="pwrap"><img loading="lazy" alt="صفحة 2325" src="pages/p2325.jpg" width="1418" height="1531"><div class="layer" data-p="2325"></div></div></section>
+<section class="pg" id="p2326" data-p="2326"><div class="pwrap"><img loading="lazy" alt="صفحة 2326" src="pages/p2326.jpg" width="1418" height="1531"><div class="layer" data-p="2326"></div></div></section>
+<section class="pg" id="p2327" data-p="2327"><div class="pwrap"><img loading="lazy" alt="صفحة 2327" src="pages/p2327.jpg" width="1418" height="1531"><div class="layer" data-p="2327"></div></div></section>
+<section class="pg" id="p2348" data-p="2348"><div class="pwrap"><img loading="lazy" alt="صفحة 2348" src="pages/p2348.jpg" width="1418" height="1531"><div class="layer" data-p="2348"></div></div></section>
+<section class="pg" id="p2349" data-p="2349"><div class="pwrap"><img loading="lazy" alt="صفحة 2349" src="pages/p2349.jpg" width="1418" height="1531"><div class="layer" data-p="2349"></div></div></section>
+<section class="pg" id="p3348" data-p="3348"><div class="pwrap"><img loading="lazy" alt="صفحة 3348" src="pages/p3348.jpg" width="1418" height="1531"><div class="layer" data-p="3348"></div></div></section>
+<section class="pg" id="p4348" data-p="4348"><div class="pwrap"><img loading="lazy" alt="صفحة 4348" src="pages/p4348.jpg" width="1418" height="1531"><div class="layer" data-p="4348"></div></div></section>
+</div>
+<div class="nav docnav">
+  <button class="ico" id="prevB" aria-label="الصفحة السابقة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
+  <div class="pos" id="posLbl"></div>
+  <button class="ico" id="nextB" aria-label="الصفحة التالية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+</div>
+
+<div class="aud" id="audBar"><div class="audin">
+  <button class="ico" id="audRate" title="سرعة التشغيل (×1 / ×0.70)" style="min-width:38px;height:38px;padding:0 8px;border:1px solid var(--line);border-radius:19px;font-size:11.5px;font-weight:800;background:#fff">×1</button>
+  <button class="ico" id="audPlay" style="width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center">
+    <svg id="icPlay" viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="icPause" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" style="display:none"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+  </button>
+  <div class="now" id="audNow"></div>
+  <input type="range" id="audSeek" min="0" max="100" value="0" step="0.2">
+  <div class="tm" id="audTm">0:00 / 0:00</div>
+</div></div>
+<div class="idxp" id="idxp">
+  <div class="idxin">
+    <div class="idxh">
+      <div class="idxt" id="idxTitle"></div>
+      <div class="seg" id="idxSeg">
+        <button class="segb on" id="modeN">الترتيب العادي</button>
+        <button class="segb" id="modeT">مود الكورس</button>
+      </div>
+      <button class="idxx" id="idxX" aria-label="إغلاق الفهرس"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+    </div>
+    <div class="idxsub" id="idxSub"></div>
+    <div class="idxl" id="idxList"></div>
+  </div>
+</div>
+<audio id="au" preload="metadata"></audio>
+
+<script>
+const UNITS = [{"k": "u1", "ar": "الوحدة 1", "es": "El español y tú", "lo": 10, "hi": 23, "me": [151, 157], "tracks": ["01", "02", "03", "04", "05"], "alts": {"02": "02_alt"}, "mg": [1284, 1285, 1286, 1287], "tr": [1316, 1317, 1318], "tr2": [2316, 2317, 2318], "met": "56", "met2": 2348}, {"k": "u2", "ar": "الوحدة 2", "es": "Una vida de película", "lo": 24, "hi": 37, "me": [158, 164], "tracks": ["06", "07"], "alts": {"07": "07_alt"}, "mg": [1288, 1289, 1290, 1291, 1292], "tr": [1320, 1321], "tr2": [2320, 2321], "met": "57", "met2": 3348}, {"k": "u3", "ar": "الوحدة 3", "es": "Yo soy así", "lo": 38, "hi": 51, "me": [165, 171], "tracks": ["08", "09"], "alts": {"08": "08_alt"}, "mg": [1293, 1294, 1295, 1296, 1297], "tr": [1322, 1323, 1324], "tr2": [2322, 2323, 2324], "met": "58", "met2": 4348}, {"k": "u4", "ar": "الوحدة 4", "es": "Hogar, dulce hogar", "lo": 52, "hi": 65, "me": [172, 178], "tracks": ["10", "11", "12", "13", "14", "15"], "alts": {"10": "10_alt", "11": "11_alt"}, "mg": [1298, 1299, 1300, 1301, 1302, 1303], "tr": [1325, 1326, 1327], "tr2": [2325, 2326, 2327], "met": "59", "met2": 2349}];
+const OV = {"10": [], "11": [{"k": "d", "x": 55.293, "y": 40.82, "w": 7.377, "lb": "01", "fl": ["auint_plus_2_01.mp3"]}, {"k": "tr", "x": 62.991, "y": 40.82, "w": 9.302, "lb": "تفريغ", "track": 1}, {"k": "a", "x": 71.946, "y": 49.511, "w": 6.736, "lb": "", "tx": "holandés"}, {"k": "a", "x": 70.761, "y": 51.894, "w": 6.736, "lb": "", "tx": "rumano español"}, {"k": "a", "x": 79.776, "y": 56.599, "w": 6.736, "lb": "", "tx": "holandés y español"}, {"k": "a", "x": 80.161, "y": 61.304, "w": 6.736, "lb": "", "tx": "rumano y español"}, {"k": "a", "x": 74.238, "y": 65.885, "w": 6.736, "lb": "", "tx": "holandés"}, {"k": "a", "x": 80.159, "y": 70.714, "w": 6.736, "lb": "", "tx": "rumano"}, {"k": "a", "x": 73.71, "y": 75.251, "w": 6.736, "lb": "", "tx": "español"}, {"k": "a", "x": 80.309, "y": 77.803, "w": 6.736, "lb": "", "tx": "inglés"}, {"k": "a", "x": 71.224, "y": 79.971, "w": 6.736, "lb": "", "tx": "inglés"}], "12": [{"k": "d", "x": 11.409, "y": 15.262, "w": 7.377, "lb": "02", "fl": ["auint_plus_2_02.mp3"]}, {"k": "d", "x": 18.627, "y": 15.262, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_02_alt.mp3"]}, {"k": "tr", "x": 29.532, "y": 15.262, "w": 9.302, "lb": "تفريغ", "track": 2}, {"k": "d", "x": 10.577, "y": 73.731, "w": 7.377, "lb": "02", "fl": ["auint_plus_2_02.mp3"]}, {"k": "d", "x": 17.794, "y": 73.731, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_02_alt.mp3"]}, {"k": "tr", "x": 28.7, "y": 73.731, "w": 9.302, "lb": "تفريغ", "track": 2}, {"k": "a", "x": 11.512, "y": 82.489, "w": 6.736, "lb": "", "tx": "Desde hace un año. ¿Y tú?"}, {"k": "a", "x": 10.106, "y": 11.889, "w": 4.811, "lb": "02", "tx": "¿Qué tal? ¡¡Hola!! Mira, soy Carmen. Y tú, ¿cómo te llamas? Barbara. ¿De dónde eres, Barbara? De... Alemania, de Berlín. De Berlín. ¿Cuánto tiempo piensas estar aquí en España, Barbara? Pienso que dos meses, pero si encuentro trabajo me voy a quedar más. A ver si hay suerte. Y... ¿qué haces en Alemania? ¿A qué te dedicas? Soy secretaria. Mmm, secretaria… vale. ¿Hablas otras lenguas? Sí, un poco de italiano, inglés bastante bien y también un poco de francés. Muy bien, hablas muchísimas lenguas. Y... ¿por qué estudias español, Barbara? Porque tengo que hacer un examen este año, pero también porque quiero vivir en España o en algún país de Latinoamérica, como Argentina o Chile. Te gusta viajar. Y... ¿desde cuándo estudias español? Mmm... pues... desde hace dos años. ¿Y qué cosas te gusta hacer en clase? No sé... Me gusta leer textos y hacer ejercicios en grupo, con mis compañeros. No me gusta mucho escribir. Ah, no te gusta escribir. ¿Qué dificultades crees que tienes con el español? ¿Qué cosas te cuestan más? Uf... ¡¡Muchas, supongo!! ¡Qué va, mujer! Hablas muy bien. No sé, por ejemplo, me cuesta mucho diferenciar entre ser y estar y a veces me cuesta pronunciar la erre. Bueno, es cuestión de práctica. ¿Y qué te gusta hacer en tu tiempo libre? Me gusta mucho la música, también me encanta ir a la playa y salir con los amigos. Muy bien, Barbara. Ya hemos acabado. Muchas gracias. Transcripciones"}], "13": [], "14": [{"k": "a", "x": 90.949, "y": 76.093, "w": 4.811, "lb": "C", "tx": "Verbos regulares: enseñar, levantarse, desayunar, trabajar, estudiar, ver, creer, hablar, viajar, dominar, confundir, pasear, descubrir, preguntar, tocar."}], "15": [{"k": "a", "x": 13.011, "y": 17.526, "w": 6.736, "lb": "", "tx": "tener, entender, querer, pensar"}, {"k": "a", "x": 25.122, "y": 17.526, "w": 6.736, "lb": "", "tx": "volver"}, {"k": "a", "x": 43.416, "y": 17.526, "w": 6.736, "lb": "", "tx": "decir, servir"}, {"k": "a", "x": 59.761, "y": 17.526, "w": 6.736, "lb": "", "tx": "tener, decir, reconocer, salir"}, {"k": "a", "x": 75.397, "y": 17.526, "w": 6.736, "lb": "", "tx": "ser, estar, ir"}, {"k": "a", "x": 32.051, "y": 72.167, "w": 6.736, "lb": "", "tx": "2014"}, {"k": "a", "x": 41.75, "y": 74.488, "w": 6.736, "lb": "", "tx": "(variable)"}, {"k": "a", "x": 56.989, "y": 76.665, "w": 6.736, "lb": "", "tx": "(variable)"}], "16": [{"k": "a", "x": 77.248, "y": 11.887, "w": 4.811, "lb": "A", "tx": "Aspectos positivos: descubrir cosas nuevas cada día, hacer amigos nuevos, aprender otros idiomas, tener sensación de libertad. Aspectos negativos: inseguridad a la hora de hacer entrevistas de trabajo, no entender las bromas, echar de menos a la familia y a los/as amigos/as."}, {"k": "a", "x": 91.63, "y": 73.268, "w": 4.811, "lb": "B", "tx": "Yo a veces me siento un poco mal lo paso muy bien, me siento inseguro/a, cuando voy a otro país y tengo que… me cuesta mucho, me siento fatal, me siento muy bien, me siento frustrado/a, me siento libre, me siento triste, me siento ridículo/a, me da vergüenza"}], "17": [{"k": "d", "x": 11.567, "y": 52.712, "w": 9.623, "lb": "03-04", "fl": ["auint_plus_2_03.mp3", "auint_plus_2_04.mp3"]}, {"k": "tr", "x": 21.51, "y": 52.712, "w": 9.302, "lb": "تفريغ", "track": 3}, {"k": "a", "x": 29.379, "y": 40.375, "w": 6.736, "lb": "", "tx": "Para mí, lo más complicado es saber cómo actuar: cuándo tengo que hablar de tú o de usted, cuándo tengo que decir o no…"}, {"k": "a", "x": 32.825, "y": 61.483, "w": 6.736, "lb": "", "tx": "inglés."}, {"k": "a", "x": 76.905, "y": 61.483, "w": 6.736, "lb": "", "tx": "alemán."}, {"k": "a", "x": 42.015, "y": 64.258, "w": 6.736, "lb": "", "tx": "le cuesta pronunciar algunas palabras. Se pone nervioso cuando no entienden lo que dice, porque tiene acento."}, {"k": "a", "x": 86.127, "y": 64.322, "w": 6.736, "lb": "", "tx": "le vocabulario nuevo. También le cuesta la"}, {"k": "a", "x": 73.512, "y": 66.048, "w": 6.736, "lb": "", "tx": "cuesta memorizar el"}, {"k": "a", "x": 77.361, "y": 71.591, "w": 6.736, "lb": "", "tx": "los verbos, las declinaciones…)."}, {"k": "a", "x": 64.518, "y": 79.378, "w": 6.736, "lb": "", "tx": "Julio César"}, {"k": "a", "x": 52.771, "y": 84.106, "w": 6.736, "lb": "", "tx": "Noemí"}, {"k": "a", "x": 62.01, "y": 86.307, "w": 6.736, "lb": "", "tx": "Julio César"}, {"k": "a", "x": 84.18, "y": 90.683, "w": 6.736, "lb": "", "tx": "Noemí"}], "18": [], "19": [], "20": [{"k": "d", "x": 11.414, "y": 15.196, "w": 7.377, "lb": "05", "fl": ["auint_plus_2_05.mp3"]}, {"k": "tr", "x": 19.112, "y": 15.196, "w": 9.302, "lb": "تفريغ", "track": 5}, {"k": "a", "x": 50.502, "y": 22.225, "w": 6.736, "lb": "", "tx": "Con sus padres, con sus hermanos, con amigos y con sus abuelos. Con muchos amigos extranjeros. Lo habla en Italia, cuando va de vacaciones con sus padres."}, {"k": "a", "x": 71.088, "y": 22.225, "w": 6.736, "lb": "", "tx": "Es la lengua que hablan en casa y cuando va a Polonia en vacaciones. Lo estudia en la universidad, lee literatura, ve muchas series y escucha música. Ve la televisión y lo usa, por ejemplo, en restaurantes."}, {"k": "a", "x": 28.433, "y": 22.867, "w": 6.736, "lb": "", "tx": "Es su lengua materna."}, {"k": "a", "x": 29.695, "y": 26.216, "w": 6.736, "lb": "", "tx": "Tiene buen nivel (estudia Filología Inglesa). Lo entiende bien, pero lo habla regular."}], "21": [{"k": "a", "x": 22.013, "y": 69.662, "w": 6.736, "lb": "", "tx": "¿Desde cuándo esquías? Desde hace 2 años. ¿Y te gusta? Me encanta, me siento muy libre cuando esquío. Pero me da un poco de miedo…"}], "22": [{"k": "a", "x": 80.19, "y": 15.638, "w": 4.811, "lb": "A", "tx": "Memorizar muchas palabras, frases y palabras, textos, canciones. Escribir mensajes, textos, un diario. Leer periódicos, revistas, textos (en voz alta), frases y palabras en voz alta. Repetir frases y palabras en voz alta. Pegar muchas palabras / frases y Ver películas y series en versión original, palabras en las paredes de casa. la televisión. Escuchar pódcast, canciones. Tener un diario cuando viajo. Buscar muchas palabras en internet / en el diccionario, todas las palabras de los textos, buscar información en internet. Chatear con amigos en el país, con gente en el país cuando viajo, con un/a nativo/a."}], "23": [{"k": "v", "x": 87.006, "y": 47.635, "w": 11.227, "lb": "فيديو", "url": "https://www.youtube.com/watch?v=lhMiL9exqsI"}, {"k": "a", "x": 24.694, "y": 50.504, "w": 6.736, "lb": "", "tx": "es de Venezuela. vive en Barcelona desde hace dieciocho años. es periodista, locutora y actriz."}, {"k": "a", "x": 92.462, "y": 52.029, "w": 6.736, "lb": "", "tx": "Solución 13. B Va a un mercado (Los Encantes) para ver telas, encajes y otras cosas que no necesita. Siempre pregunta todos los precios. Antes de llegar al mercado, compra un té ma­ rroquí. Cuando sale del mercado va a un bar y come un bocadillo (de chistorra), una ración de pimientos asados y un café con leche corto de café."}, {"k": "a", "x": 42.268, "y": 39.307, "w": 4.811, "lb": "C", "tx": "- En Venezuela toman el café en taza. En España, en vaso de vidrio. - Porque no se usa solo para las personas, sino también para animales y cosas. Se usa mucho. - Su impresión es que en España las personas son más directas. Dice que en Venezuela la gente se abraza más."}], "24": [], "25": [{"k": "a", "x": 63.949, "y": 49.391, "w": 6.736, "lb": "", "tx": "actuó"}, {"k": "a", "x": 70.514, "y": 58.801, "w": 6.736, "lb": "", "tx": "escaló"}, {"k": "a", "x": 57.197, "y": 63.506, "w": 6.736, "lb": "", "tx": "viajó"}, {"k": "a", "x": 81.728, "y": 65.827, "w": 6.736, "lb": "", "tx": "ganó"}, {"k": "a", "x": 57.197, "y": 77.62, "w": 6.736, "lb": "", "tx": "consiguió"}, {"k": "a", "x": 65.096, "y": 82.327, "w": 6.736, "lb": "", "tx": "pintó"}, {"k": "a", "x": 73.671, "y": 87.032, "w": 6.736, "lb": "", "tx": "se convirtió en"}], "26": [{"k": "a", "x": 48.445, "y": 47.579, "w": 6.736, "lb": "", "tx": "4"}, {"k": "a", "x": 4.273, "y": 48.015, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 48.442, "y": 54.318, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 4.303, "y": 55.627, "w": 6.736, "lb": "", "tx": "1"}], "27": [{"k": "d", "x": 10.728, "y": 68.275, "w": 7.377, "lb": "06", "fl": ["auint_plus_2_06.mp3"]}, {"k": "tr", "x": 18.426, "y": 68.275, "w": 9.302, "lb": "تفريغ", "track": 6}, {"k": "a", "x": 56.684, "y": 48.658, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 53.507, "y": 51.33, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 56.684, "y": 53.778, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 53.507, "y": 56.427, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 53.507, "y": 58.976, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 56.684, "y": 61.456, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 53.507, "y": 64.073, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 71.059, "y": 78.729, "w": 6.736, "lb": "", "tx": "E"}, {"k": "a", "x": 71.059, "y": 81.127, "w": 6.736, "lb": "", "tx": "B"}, {"k": "a", "x": 71.059, "y": 83.525, "w": 6.736, "lb": "", "tx": "C"}, {"k": "a", "x": 71.059, "y": 85.923, "w": 6.736, "lb": "", "tx": "D"}, {"k": "a", "x": 71.059, "y": 88.321, "w": 6.736, "lb": "", "tx": "A"}, {"k": "a", "x": 71.059, "y": 90.719, "w": 6.736, "lb": "", "tx": "E"}], "28": [{"k": "a", "x": 22.333, "y": 78.216, "w": 6.736, "lb": "", "tx": "pasé"}, {"k": "a", "x": 36.627, "y": 78.216, "w": 6.736, "lb": "", "tx": "conocí"}, {"k": "a", "x": 49.066, "y": 78.216, "w": 6.736, "lb": "", "tx": "viví"}, {"k": "a", "x": 23.987, "y": 85.268, "w": 6.736, "lb": "", "tx": "pasamos"}, {"k": "a", "x": 38.237, "y": 85.268, "w": 6.736, "lb": "", "tx": "conocimos"}, {"k": "a", "x": 50.675, "y": 85.268, "w": 6.736, "lb": "", "tx": "vivimos"}, {"k": "a", "x": 23.733, "y": 89.969, "w": 6.736, "lb": "", "tx": "pasaron"}], "29": [{"k": "a", "x": 16.204, "y": 44.074, "w": 6.736, "lb": "", "tx": "crucé empecé"}, {"k": "a", "x": 73.714, "y": 44.289, "w": 6.736, "lb": "", "tx": "organicé toqué"}, {"k": "a", "x": 73.714, "y": 45.889, "w": 6.736, "lb": "", "tx": "jugué pagué"}, {"k": "a", "x": 50.74, "y": 71.791, "w": 4.811, "lb": "A", "tx": "2. Isabel Allende escribió . 3. Frida Kahlo y Diego Rivera se casaron dos veces. 4. Pau Gasol jugó en el FC Barcelona de 1999 a 2001. 5. En 2018 Guillermo del Toro ganó dos premios Óscar. 6. Penélope Cruz y Javier Bardem protagonizaron la película . 7. Manuel Elkin inventó la vacuna contra la malaria. 8. Lupita Nyong’o nació en México."}], "30": [{"k": "a", "x": 16.862, "y": 67.285, "w": 6.736, "lb": "", "tx": "fue"}, {"k": "a", "x": 52.519, "y": 67.207, "w": 6.736, "lb": "", "tx": "compuso"}, {"k": "a", "x": 76.93, "y": 67.449, "w": 6.736, "lb": "", "tx": "fue"}, {"k": "a", "x": 18.485, "y": 68.865, "w": 6.736, "lb": "", "tx": "obtuvo murió"}, {"k": "a", "x": 43.226, "y": 68.865, "w": 6.736, "lb": "", "tx": "tuvo hizo"}, {"k": "a", "x": 76.93, "y": 69.049, "w": 6.736, "lb": "", "tx": "estuvo"}, {"k": "a", "x": 69.275, "y": 76.54, "w": 6.736, "lb": "", "tx": "Los verbos ser (1) e ir (7)."}, {"k": "a", "x": 73.711, "y": 80.529, "w": 6.736, "lb": "", "tx": "Morir tiene las mismas terminaciones que los verbos regulares. Es irregular porque presenta un cambio vocálico en la raíz (o > u)."}, {"k": "a", "x": 31.684, "y": 85.204, "w": 6.736, "lb": "", "tx": "Los demás tienen la raíz irregular y la misma terminación."}, {"k": "a", "x": 72.9, "y": 58.652, "w": 4.811, "lb": "B", "tx": "Cine: obtuvo el Óscar a la mejor película en 2013. fue una de las películas nominadas. Historia: el primer viaje al espacio con una persona a bordo fue en 1961. Halle Berry ganó un Óscar a la mejor actriz principal, Deportes: el Mundial de Sudáfrica, pero no sé si fue la primera afroamericana…. donde la selección española se proclamó campeona, tuvo lugar en 2010. Música: el álbum se convirtió en un gran éxito de ventas cuando salió al mercado, en 1982."}], "31": [{"k": "a", "x": 14.061, "y": 22.288, "w": 6.736, "lb": "", "tx": "2003"}, {"k": "a", "x": 22.77, "y": 22.288, "w": 6.736, "lb": "", "tx": "2007"}, {"k": "a", "x": 46.327, "y": 24.66, "w": 6.736, "lb": "", "tx": "año"}, {"k": "a", "x": 44.518, "y": 29.37, "w": 6.736, "lb": "", "tx": "dos"}, {"k": "a", "x": 36.058, "y": 31.708, "w": 6.736, "lb": "", "tx": "cuatro"}, {"k": "a", "x": 41.745, "y": 36.395, "w": 6.736, "lb": "", "tx": "(x)"}, {"k": "a", "x": 47.518, "y": 38.78, "w": 6.736, "lb": "", "tx": "2011"}, {"k": "a", "x": 46.767, "y": 41.05, "w": 6.736, "lb": "", "tx": "2012"}, {"k": "a", "x": 53.555, "y": 50.375, "w": 4.811, "lb": "C", "tx": "Nació hace (x) años. Estudió en la Universidad de Salamanca durante 4 años. Terminó el Grado en Lengua y Literatura Inglesas hace (x) años. De 2006 a 2009 vivió en el extranjero. Trabajó de camarero de 2006 a 2007. Trabajó en una editorial de 2010 a 2011 y al año siguiente empezó a trabajar en la ONU."}], "32": [], "33": [], "34": [{"k": "a", "x": 81.141, "y": 38.6, "w": 6.736, "lb": "", "tx": "un mes"}, {"k": "a", "x": 68.836, "y": 40.418, "w": 6.736, "lb": "", "tx": "Una semana después"}, {"k": "a", "x": 68.836, "y": 42.018, "w": 6.736, "lb": "", "tx": "más tarde"}, {"k": "a", "x": 45.215, "y": 64.196, "w": 6.736, "lb": "", "tx": "Poco tiempo después"}, {"k": "a", "x": 45.215, "y": 65.796, "w": 6.736, "lb": "", "tx": "Durante ese tiempo"}, {"k": "a", "x": 71.312, "y": 64.196, "w": 6.736, "lb": "", "tx": "En 2018"}], "35": [], "36": [{"k": "d", "x": 11.414, "y": 15.285, "w": 7.377, "lb": "07", "fl": ["auint_plus_2_07.mp3"]}, {"k": "d", "x": 18.631, "y": 15.285, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_07_alt.mp3"]}, {"k": "tr", "x": 29.537, "y": 15.285, "w": 9.302, "lb": "تفريغ", "track": 7}, {"k": "a", "x": 89.734, "y": 45.814, "w": 4.811, "lb": "A", "tx": "Argentina: estudió hasta 2008. Los tres lugares más importantes de mi vida son París, Londres y Bruselas. París, porque nací México: viajó, recorrió el país y visitó allí; Londres, porque allí conocí a mi pareja; y… a amigos. Después, decidió quedarse y buscó trabajo. Trabajó de camarera en un restaurante y de fotógrafa en un hotel. Londres: fue tres meses a estudiar inglés. España: los primeros años trabajó de camarera, de canguro, de dependienta. En la actualidad tiene un proyecto musical con unos amigos. ¿Cuándo naciste? En 1998. ¿Cuándo terminaste tus estudios? En 2020. ¿Cuál es tu trabajo ideal? Fotógrafo de moda. ¿Quieres tener hijos?"}], "37": [{"k": "v", "x": 88.132, "y": 55.1, "w": 11.227, "lb": "فيديو", "url": "https://www.youtube.com/watch?v=llh3qWNYuqk"}, {"k": "a", "x": 21.742, "y": 60.643, "w": 6.736, "lb": "", "tx": "Nació en México en 1893. Volvió durante su adolescencia. Se casó (con Manuel Rodríguez). Conoció y convivió con otros artistas de la época, como Frida Kahlo."}, {"k": "a", "x": 67.197, "y": 60.643, "w": 6.736, "lb": "", "tx": "Se mudó allí con su familia a la edad de cuatro años. Inició su instrucción artística. Estudió danza clásica, pintura, literatura y teatro. Conoció a Pablo Picasso."}], "38": [], "39": [{"k": "a", "x": 76.701, "y": 45.877, "w": 6.736, "lb": "", "tx": "Yadier"}, {"k": "a", "x": 65.613, "y": 48.178, "w": 6.736, "lb": "", "tx": "Penélope Carolina"}, {"k": "a", "x": 75.537, "y": 52.965, "w": 6.736, "lb": "", "tx": "Héctor"}, {"k": "a", "x": 69.673, "y": 55.977, "w": 6.736, "lb": "", "tx": "Ernesto y Carolina se parecen, ¿no? Tienen los ojos parecidos… Pero Ernesto también se parece a…"}, {"k": "a", "x": 76.701, "y": 47.477, "w": 6.736, "lb": "1", "tx": "B, C Bengie y Yadier Molina son hermanos. Son jugadores de béisbol. Mónica y Penélope Cruz son hermanas. Las dos son actrices. Carolina y Carolina Herrera son madre e hija. Son diseñadoras de moda. Ernesto y Héctor Alterio son padre e hijo. Los dos son actores."}], "40": [], "41": [{"k": "d", "x": 11.579, "y": 15.262, "w": 7.377, "lb": "08", "fl": ["auint_plus_2_08.mp3"]}, {"k": "d", "x": 18.797, "y": 15.262, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_08_alt.mp3"]}, {"k": "tr", "x": 29.702, "y": 15.262, "w": 9.302, "lb": "تفريغ", "track": 8}, {"k": "d", "x": 10.577, "y": 70.094, "w": 7.377, "lb": "08", "fl": ["auint_plus_2_08.mp3"]}, {"k": "d", "x": 17.794, "y": 70.094, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_08_alt.mp3"]}, {"k": "tr", "x": 28.7, "y": 70.094, "w": 9.302, "lb": "تفريغ", "track": 8}, {"k": "a", "x": 49.228, "y": 28.109, "w": 6.736, "lb": "", "tx": "5. Felipe"}, {"k": "a", "x": 25.242, "y": 28.327, "w": 6.736, "lb": "", "tx": "2. Isabel"}, {"k": "a", "x": 51.014, "y": 35.599, "w": 6.736, "lb": "", "tx": "1. Juan José"}, {"k": "a", "x": 57.279, "y": 43.694, "w": 6.736, "lb": "", "tx": "6. Leonor"}, {"k": "a", "x": 28.208, "y": 45.395, "w": 6.736, "lb": "", "tx": "3. Ricardo"}, {"k": "a", "x": 19.783, "y": 53.237, "w": 6.736, "lb": "", "tx": "4. Aurora"}, {"k": "a", "x": 57.794, "y": 70.16, "w": 4.811, "lb": "B", "tx": "Juan José: su primo - Isabel: su hermana - Es rubia y lleva un vestido azul. Ricardo: un compañero de trabajo - Aurora: ¿Esta? su jefa - Felipe: un vecino - Leonor: su tía Sí."}], "42": [{"k": "d", "x": 10.577, "y": 15.205, "w": 7.377, "lb": "09", "fl": ["auint_plus_2_09.mp3"]}, {"k": "tr", "x": 18.275, "y": 15.205, "w": 9.302, "lb": "تفريغ", "track": 9}, {"k": "d", "x": 10.579, "y": 48.141, "w": 7.377, "lb": "09", "fl": ["auint_plus_2_09.mp3"]}, {"k": "tr", "x": 18.277, "y": 48.141, "w": 9.302, "lb": "تفريغ", "track": 9}, {"k": "a", "x": 55.181, "y": 11.665, "w": 4.811, "lb": "A", "tx": "Guille y Ari son los hijos de Cristina. Cristina y Joan son hermanos."}, {"k": "a", "x": 59.876, "y": 48.207, "w": 4.811, "lb": "B", "tx": "Cristina y Guille tienen la misma forma de la cara y los ojos claros. Cristina y Joan tienen la misma nariz y Mi madre dice que me parezco a mi la misma sonrisa. Los dos son rubios. Los padre, pero yo creo que físicamente me dos son muy simpáticos y extrovertidos. parezco mucho más a mi madre. Soy Joan es muy tranquilo y Cristina no lo es. alto, como ella, y los dos tenemos los ojos azules. En el carácter me parezco más a mi padre…"}], "43": [{"k": "a", "x": 86.006, "y": 35.264, "w": 6.736, "lb": "", "tx": "Daniela"}, {"k": "a", "x": 78.66, "y": 56.544, "w": 6.736, "lb": "", "tx": "Elena"}, {"k": "a", "x": 34.315, "y": 69.92, "w": 6.736, "lb": "", "tx": "alto/a, moreno/a, bajito/a, delgado/a, rubio/a joven, guapo/a, pelirrojo/a, calvo/a, atlético/a"}, {"k": "a", "x": 56.321, "y": 69.92, "w": 6.736, "lb": "", "tx": ", moreno/a,"}, {"k": "a", "x": 26.603, "y": 75.452, "w": 6.736, "lb": "", "tx": "el pelo largo, (el pelo) liso , los ojos negros / verdes / azules, el pelo muy rizado"}, {"k": "a", "x": 35.893, "y": 79.812, "w": 6.736, "lb": "", "tx": "un vestido, un bolso, gafas de sol, el pelo recogido, vaqueros, una camiseta verde , el pelo largo / corto, barba, gafas, una camisa lila"}], "44": [{"k": "a", "x": 47.594, "y": 11.828, "w": 4.811, "lb": "", "tx": "Diego Leila Abigail Sandra Lía la morena la de la izquierda, la de la derecha, la de las coletas lleva gafas, está entre Sandra y yo."}, {"k": "a", "x": 47.594, "y": 13.428, "w": 4.811, "lb": "", "tx": "está en el centro de la foto. lleva una camiseta azul. que está al lado de Lía. naranja."}], "45": [{"k": "a", "x": 33.838, "y": 16.55, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 33.838, "y": 19.151, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 8.971, "y": 74.26, "w": 6.736, "lb": "", "tx": "Esta"}, {"k": "a", "x": 46.472, "y": 74.467, "w": 6.736, "lb": "", "tx": "esas"}, {"k": "a", "x": 66.551, "y": 88.66, "w": 6.736, "lb": "", "tx": "esa"}, {"k": "a", "x": 17.168, "y": 89.18, "w": 6.736, "lb": "", "tx": "esa"}, {"k": "a", "x": 49.597, "y": 91.006, "w": 6.736, "lb": "", "tx": "aquellos"}], "46": [], "47": [], "48": [], "49": [{"k": "a", "x": 13.848, "y": 42.826, "w": 6.736, "lb": "", "tx": "Penélope Cruz"}, {"k": "a", "x": 55.074, "y": 42.826, "w": 6.736, "lb": "", "tx": "Carla Bruni"}, {"k": "a", "x": 13.31, "y": 45.165, "w": 6.736, "lb": "", "tx": "Mario Casas"}, {"k": "a", "x": 55.794, "y": 45.224, "w": 6.736, "lb": "", "tx": "Mariah Carey"}, {"k": "a", "x": 12.764, "y": 47.505, "w": 6.736, "lb": "", "tx": "Tony Curtis"}, {"k": "a", "x": 56.302, "y": 47.622, "w": 6.736, "lb": "", "tx": "Novac Djokovic"}, {"k": "a", "x": 13.261, "y": 49.844, "w": 6.736, "lb": "", "tx": "Kevin Bacon"}, {"k": "a", "x": 27.886, "y": 69.685, "w": 6.736, "lb": "", "tx": "Se parece un poco a Andie MacDowell, la actriz y modelo estadounidense. ¿Valentine? No. ¿Julia? ¡Sí!"}, {"k": "a", "x": 92.462, "y": 78.39, "w": 6.736, "lb": "", "tx": "Solución 10. D 1. En los labios. Es morena y tiene los ojos marrones. Es la típica española. 2. Hacen bastante ejercicio, se parecen en el color del pelo y de la piel. Según el amigo: Mario Casas tiene el pelo un poco más corto y oscuro, y lleva un peinado diferente. Tiene la cara más redondeada y con menos pelo. 3. En la nariz. Tienen los ojos claros y el pelo un poco liso. 4. Llevaban el mismo peinado, aunque el color era diferente. 5. Es alto, rubio, con los ojos claros y las facciones marcadas. 6. Tiene una estatura media. Tiene el pelo largo y es morena. 7. Es alto, delgado, con el pelo castaño y los ojos verdes."}], "50": [{"k": "a", "x": 11.542, "y": 34.028, "w": 6.736, "lb": "", "tx": "¿Ah, sí? ¿Y cómo es? Pues es rubio, tiene los ojos verdes… ¿Es guapo? Sí, mucho."}], "51": [{"k": "v", "x": 87.567, "y": 55.462, "w": 11.227, "lb": "فيديو", "url": "https://www.youtube.com/watch?v=P56ExvNMBG8"}, {"k": "a", "x": 38.46, "y": 60.438, "w": 6.736, "lb": "", "tx": "El padre. La hija mayor."}, {"k": "a", "x": 74.131, "y": 64.384, "w": 6.736, "lb": "", "tx": "La hija mayor."}, {"k": "a", "x": 42.938, "y": 65.971, "w": 6.736, "lb": "", "tx": "El paje del rey Melchor. La hija menor."}, {"k": "a", "x": 70.777, "y": 69.905, "w": 6.736, "lb": "", "tx": "Solución 12. C La hija mayor quiere decirle que saben que los Reyes Magos no existen. La hija menor no quiere y amenaza a su hermana con contarle a su padre otros secretos."}, {"k": "a", "x": 59.61, "y": 69.905, "w": 6.736, "lb": "", "tx": "La hija menor."}, {"k": "a", "x": 53.028, "y": 71.724, "w": 6.736, "lb": "", "tx": "La hija menor."}, {"k": "a", "x": 30.014, "y": 39.307, "w": 4.811, "lb": "D", "tx": "La hija mayor está a punto de decirle la verdad, pero al final no lo hace porque no quiere hacerle daño. El padre todavía las ve como niñas pequeñas."}], "52": [], "53": [{"k": "a", "x": 72.799, "y": 59.636, "w": 6.736, "lb": "", "tx": "Yo creo que la casa de campo está bien para una familia que va de vacaciones. Sí, o para un grupo de amigos."}, {"k": "a", "x": 70.783, "y": 82.496, "w": 6.736, "lb": "", "tx": "Yo ahora vivo en un piso compartido. Pero viví en una casa varios años. Yo siempre he vivido en una casa."}], "54": [], "55": [{"k": "d", "x": 10.598, "y": 66.498, "w": 7.377, "lb": "10", "fl": ["auint_plus_2_10.mp3"]}, {"k": "d", "x": 17.815, "y": 66.498, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_10_alt.mp3"]}, {"k": "tr", "x": 28.721, "y": 66.498, "w": 9.302, "lb": "تفريغ", "track": 10}, {"k": "a", "x": 26.871, "y": 74.838, "w": 6.736, "lb": "", "tx": "los cojines, el cuadro, el sillón"}, {"k": "a", "x": 43.702, "y": 74.838, "w": 6.736, "lb": "", "tx": "el sofá (no está mal), el sillón (no está mal) los cojines, los muebles blancos"}, {"k": "a", "x": 26.536, "y": 80.853, "w": 6.736, "lb": "", "tx": "la estantería"}, {"k": "a", "x": 28.502, "y": 86.774, "w": 6.736, "lb": "", "tx": "acogedor, normal"}, {"k": "a", "x": 41.14, "y": 86.774, "w": 6.736, "lb": "", "tx": "luminoso, demasiado moderno, un poco frío"}], "56": [{"k": "a", "x": 60.049, "y": 45.926, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 60.049, "y": 48.479, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.693, "y": 51.031, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.693, "y": 53.584, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 60.049, "y": 56.136, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 60.049, "y": 58.689, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.693, "y": 61.241, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.693, "y": 63.794, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.693, "y": 66.346, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 26.802, "y": 78.498, "w": 6.736, "lb": "", "tx": "encima de (del)"}, {"k": "a", "x": 66.065, "y": 78.342, "w": 6.736, "lb": "", "tx": "al lado de"}, {"k": "a", "x": 69.123, "y": 81.196, "w": 6.736, "lb": "", "tx": "entre"}, {"k": "a", "x": 30.722, "y": 81.135, "w": 6.736, "lb": "", "tx": "delante de (del)"}, {"k": "a", "x": 16.306, "y": 83.91, "w": 6.736, "lb": "", "tx": "Debajo de"}, {"k": "a", "x": 57.97, "y": 88.969, "w": 6.736, "lb": "", "tx": "a la derecha de (del)"}], "57": [{"k": "d", "x": 10.675, "y": 20.827, "w": 7.377, "lb": "11", "fl": ["auint_plus_2_11.mp3"]}, {"k": "d", "x": 17.892, "y": 20.827, "w": 9.623, "lb": "بديلة", "fl": ["auint_plus_2_11_alt.mp3"]}, {"k": "tr", "x": 28.798, "y": 20.827, "w": 9.302, "lb": "تفريغ", "track": 11}, {"k": "a", "x": 33.185, "y": 27.731, "w": 6.736, "lb": "", "tx": "un ático. Es pequeño, pero muy acogedor. Es muy luminoso y tranquilo."}, {"k": "a", "x": 28.404, "y": 30.376, "w": 6.736, "lb": "", "tx": "en el centro de la ciudad, en una zona muy bonita 55 m 2, ascensor, un salón de 20 m 2 , mucha luz, una habitación, una cocina americana, una terraza de 15 m 2 y unas vistas muy bonitas. una calle peatonal y a un mercado."}, {"k": "a", "x": 18.709, "y": 67.5, "w": 6.736, "lb": "", "tx": "la mía"}, {"k": "a", "x": 38.103, "y": 67.5, "w": 6.736, "lb": "", "tx": "el mío"}, {"k": "a", "x": 38.257, "y": 69.915, "w": 6.736, "lb": "", "tx": "el tuyo"}, {"k": "a", "x": 28.207, "y": 82.518, "w": 6.736, "lb": "", "tx": "Yo vivo en una casa que da al mar. No es muy grande, pero es muy luminosa y tiene unas vistas preciosas… Pues la mía…"}], "58": [{"k": "a", "x": 51.712, "y": 11.887, "w": 4.811, "lb": "A", "tx": "- precios del alquiler - ayudas para estudiantes - el ambiente - el tamaño de las viviendas - las mejores y peores zonas - información sobre los suministros (electricidad, agua…)"}], "59": [{"k": "a", "x": 48.912, "y": 31.329, "w": 6.736, "lb": "", "tx": "conoces a más gente, tienen más ayudas que…"}, {"k": "a", "x": 70.975, "y": 31.329, "w": 6.736, "lb": "", "tx": "te diviertes más…"}, {"k": "a", "x": 28.672, "y": 32.994, "w": 6.736, "lb": "", "tx": "más cara, más grandes (que…)"}, {"k": "a", "x": 23.859, "y": 38.045, "w": 6.736, "lb": "", "tx": "tan caros como…"}, {"k": "a", "x": 51.524, "y": 38.045, "w": 6.736, "lb": "", "tx": "conocer a tanta gente como…"}, {"k": "a", "x": 72.347, "y": 38.045, "w": 6.736, "lb": "", "tx": "se sufre tanto como…"}, {"k": "a", "x": 27.388, "y": 44.531, "w": 6.736, "lb": "", "tx": "son menos conocidos que…"}, {"k": "a", "x": 50.358, "y": 44.531, "w": 6.736, "lb": "", "tx": "menos meses de frío que…"}, {"k": "a", "x": 71.694, "y": 44.531, "w": 6.736, "lb": "", "tx": "cuestan menos que…"}, {"k": "a", "x": 54.206, "y": 50.575, "w": 6.736, "lb": "", "tx": "no tienes tanto espacio, no hay tantos pisos amueblados, no tienen tantas habitaciones, no hay tanta luz como…"}, {"k": "a", "x": 26.991, "y": 51.442, "w": 6.736, "lb": "", "tx": "no son tan caros como…"}, {"k": "a", "x": 70.854, "y": 51.442, "w": 6.736, "lb": "", "tx": "no gastan tanto…"}], "60": [], "61": [], "62": [{"k": "d", "x": 11.414, "y": 14.326, "w": 9.623, "lb": "12-15", "fl": ["auint_plus_2_12.mp3", "auint_plus_2_13.mp3", "auint_plus_2_14.mp3", "auint_plus_2_15.mp3"]}, {"k": "tr", "x": 21.358, "y": 14.326, "w": 9.302, "lb": "تفريغ", "track": 12}, {"k": "a", "x": 14.244, "y": 33.747, "w": 6.736, "lb": "", "tx": "el comedor y el baño"}, {"k": "a", "x": 29.971, "y": 33.747, "w": 6.736, "lb": "", "tx": "el salón"}, {"k": "a", "x": 52.344, "y": 33.747, "w": 6.736, "lb": "", "tx": "el dormitorio"}, {"k": "a", "x": 71.422, "y": 33.747, "w": 6.736, "lb": "", "tx": "la terraza"}, {"k": "a", "x": 14.83, "y": 38.998, "w": 6.736, "lb": "", "tx": "pasa tiempo allí con su familia y amigos. Le gusta tomar un baño relajante."}, {"k": "a", "x": 36.498, "y": 38.998, "w": 6.736, "lb": "", "tx": "Lo acaba de pintar (azul) y es muy luminoso. Le gusta leer y escuchar música allí."}, {"k": "a", "x": 55.112, "y": 38.998, "w": 6.736, "lb": "", "tx": "Juega allí con su hijo, ve películas (tiene un televisor)y, a veces, come."}, {"k": "a", "x": 76.307, "y": 38.998, "w": 6.736, "lb": "", "tx": "Es grande y agradable y tiene flores. A veces, toma el sol ahí."}, {"k": "a", "x": 24.565, "y": 76.129, "w": 6.736, "lb": "", "tx": "Yo normalmente estudio en mi habitación y, a veces, en el salón. Pues a mí me encanta estudiar en la cocina. Tengo una cocina grande y con mucha luz."}], "63": [{"k": "a", "x": 41.779, "y": 60.543, "w": 6.736, "lb": "", "tx": "Para mí, un salón industrial es grande y tiene muebles de colores oscuros, como el negro y el marrón… Sí, y muebles de metal, ¿no?…"}], "64": [{"k": "a", "x": 11.424, "y": 53.207, "w": 6.736, "lb": "", "tx": "Un frigorífico, una mesa, una lavadora… ¿Y si ponemos la lavadora en el baño?"}, {"k": "a", "x": 23.404, "y": 53.207, "w": 6.736, "lb": "", "tx": "¿Qué ponemos en la cocina?"}], "65": [{"k": "v", "x": 88.132, "y": 45.003, "w": 11.227, "lb": "فيديو", "url": "https://www.youtube.com/watch?v=ZRf54Bv-Hhg"}, {"k": "a", "x": 59.956, "y": 57.355, "w": 4.811, "lb": "C", "tx": "1. - el frigorífico: tienen imanes de recuerdo de distintos lugares. Es una nevera normal. - la ventana de la cocina: deja entrar la luz del salón y la cierra para evitar olores. - la vitrina: le encanta el color y el mueble en sí. Lo usan - el zapatero: lo odia porque tiene un filo para guardar tazas, copas… que corta al pasar. - el cuadro de perros: le encanta. Es un regalo de Navidad. - la mesa para comer: es plegable. Abren - el sofá: es de El Corte Inglés. Es supercómodo y se estira un ala cuando comen dos y la otra cuando completamente. Es un regalo de su madre. son más personas (caben hasta 8). Es de - la cama: es bastante grande (1,50 m). Es de Ikea. La base Ikea y tiene cajones. de la cama es más grande (1,60 m) y, por eso, hay un hueco. - el cuadro de coches: se lo regalaron a - el armario de la habitación: guardan cosas de los perros, Álvaro porque le gustan mucho los coches; abrigos… Hay otro solo para ella y otro solo para Álvaro. ese especialmente. 2. Donde está el cuadro con los perros y la vitrina."}], "151": [{"k": "a", "x": 78.281, "y": 21.38, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 78.326, "y": 24.626, "w": 6.736, "lb": "", "tx": "8"}, {"k": "a", "x": 15.891, "y": 27.924, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 25.311, "y": 27.924, "w": 6.736, "lb": "", "tx": "con"}, {"k": "a", "x": 78.178, "y": 27.872, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 78.329, "y": 31.119, "w": 6.736, "lb": "", "tx": "6"}, {"k": "a", "x": 12.119, "y": 34.199, "w": 6.736, "lb": "", "tx": "En"}, {"k": "a", "x": 32.827, "y": 34.199, "w": 6.736, "lb": "", "tx": "con"}, {"k": "a", "x": 78.306, "y": 34.365, "w": 6.736, "lb": "", "tx": "5"}, {"k": "a", "x": 10.953, "y": 36.844, "w": 6.736, "lb": "", "tx": "En"}, {"k": "a", "x": 78.288, "y": 37.611, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 34.626, "y": 39.657, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 78.314, "y": 40.857, "w": 6.736, "lb": "", "tx": "7"}, {"k": "a", "x": 22.049, "y": 41.6, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 78.292, "y": 44.103, "w": 6.736, "lb": "", "tx": "4"}, {"k": "a", "x": 35.415, "y": 44.212, "w": 6.736, "lb": "", "tx": "entre"}], "152": [{"k": "a", "x": 13.827, "y": 17.514, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 14.541, "y": 20.65, "w": 7.379, "tx": "para"}, {"k": "a", "x": 13.827, "y": 26.114, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 57.473, "y": 17.514, "w": 7.379, "tx": "para"}, {"k": "a", "x": 57.714, "y": 20.585, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 54.025, "y": 23.761, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 53.88, "y": 26.715, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 13.418, "y": 29.133, "w": 9.624, "tx": "porque"}, {"k": "a", "x": 57.313, "y": 29.878, "w": 7.379, "tx": "para"}, {"k": "a", "x": 1.283, "y": 43.5, "w": 19.246, "tx": "errores corrección reglas fluidez"}, {"k": "a", "x": 1.283, "y": 46.5, "w": 17.321, "tx": "pizarra vídeos notas"}, {"k": "a", "x": 1.283, "y": 49.5, "w": 19.246, "tx": "canciones por la clase con sus manos"}, {"k": "a", "x": 1.283, "y": 52.5, "w": 16.455, "tx": "otras personas solo"}], "153": [{"k": "a", "x": 24.642, "y": 23.166, "w": 6.736, "lb": "", "tx": "tiene vive"}, {"k": "a", "x": 32.78, "y": 27.118, "w": 6.736, "lb": "", "tx": "trabaja"}, {"k": "a", "x": 18.755, "y": 31.071, "w": 6.736, "lb": "", "tx": "se levanta desayuna"}, {"k": "a", "x": 32.365, "y": 32.938, "w": 6.736, "lb": "", "tx": "trabaja"}, {"k": "a", "x": 40.345, "y": 37.032, "w": 6.736, "lb": "", "tx": "estudia"}, {"k": "a", "x": 40.345, "y": 38.632, "w": 6.736, "lb": "", "tx": "ve"}, {"k": "a", "x": 21.047, "y": 38.914, "w": 6.736, "lb": "", "tx": "lee"}, {"k": "a", "x": 28.559, "y": 40.859, "w": 6.736, "lb": "", "tx": "Habla"}, {"k": "a", "x": 11.71, "y": 44.67, "w": 6.736, "lb": "", "tx": "quiere"}, {"k": "a", "x": 17.196, "y": 58.501, "w": 6.736, "lb": "", "tx": "Vivo"}, {"k": "a", "x": 11.392, "y": 60.886, "w": 6.736, "lb": "", "tx": "conozco"}, {"k": "a", "x": 18.504, "y": 63.206, "w": 6.736, "lb": "", "tx": "pienso"}, {"k": "a", "x": 12.009, "y": 65.654, "w": 6.736, "lb": "", "tx": "me levanto"}, {"k": "a", "x": 30.139, "y": 65.654, "w": 6.736, "lb": "", "tx": "me ducho"}, {"k": "a", "x": 13.918, "y": 68.037, "w": 6.736, "lb": "", "tx": "me visto"}, {"k": "a", "x": 31.097, "y": 68.037, "w": 6.736, "lb": "", "tx": "salgo"}, {"k": "a", "x": 16.251, "y": 70.295, "w": 6.736, "lb": "", "tx": "tengo"}, {"k": "a", "x": 62.514, "y": 71.922, "w": 6.736, "lb": "", "tx": "¿Desde cuándo vives en España?"}, {"k": "a", "x": 18.015, "y": 72.618, "w": 6.736, "lb": "", "tx": "puedo"}, {"k": "a", "x": 24.405, "y": 75.001, "w": 6.736, "lb": "", "tx": "empiezo"}, {"k": "a", "x": 62.766, "y": 76.874, "w": 6.736, "lb": "", "tx": "¿Desde cuándo estudias español?"}, {"k": "a", "x": 22.279, "y": 77.323, "w": 6.736, "lb": "", "tx": "cierro"}, {"k": "a", "x": 17.597, "y": 79.706, "w": 6.736, "lb": "", "tx": "trabajo"}, {"k": "a", "x": 66.046, "y": 81.827, "w": 6.736, "lb": "", "tx": "¿Desde cuándo trabajas en esta empresa?"}, {"k": "a", "x": 19.934, "y": 84.412, "w": 6.736, "lb": "", "tx": "siento"}, {"k": "a", "x": 61.774, "y": 86.779, "w": 6.736, "lb": "", "tx": "¿Desde cuándo haces deporte?"}, {"k": "a", "x": 30.263, "y": 91.353, "w": 6.736, "lb": "", "tx": "veterinaria"}], "154": [{"k": "d", "x": 12.11, "y": 11.585, "w": 7.377, "lb": "56", "fl": ["auint_plus_2_56.mp3"]}, {"k": "tr", "x": 19.809, "y": 11.585, "w": 9.302, "lb": "تفريغ", "track": 56}, {"k": "a", "x": 61.017, "y": 20.532, "w": 6.736, "lb": "", "tx": "soy"}, {"k": "a", "x": 83.755, "y": 20.532, "w": 6.736, "lb": "", "tx": "me siento"}, {"k": "a", "x": 36.806, "y": 19.968, "w": 6.736, "lb": "", "tx": "diez años"}, {"k": "a", "x": 18.82, "y": 26.219, "w": 6.736, "lb": "", "tx": "cuatro años"}, {"k": "a", "x": 34.548, "y": 28.562, "w": 6.736, "lb": "", "tx": "los quince años"}, {"k": "a", "x": 64.429, "y": 30.676, "w": 6.736, "lb": "", "tx": "me siento"}, {"k": "a", "x": 31.483, "y": 32.373, "w": 6.736, "lb": "", "tx": "cinco años"}, {"k": "a", "x": 79.999, "y": 32.954, "w": 6.736, "lb": "", "tx": "me siento"}, {"k": "a", "x": 81.209, "y": 38.285, "w": 6.736, "lb": "", "tx": "soy"}, {"k": "a", "x": 77.223, "y": 40.67, "w": 6.736, "lb": "", "tx": "me siento"}, {"k": "a", "x": 61.378, "y": 46.254, "w": 6.736, "lb": "", "tx": "soy"}, {"k": "a", "x": 66.193, "y": 50.959, "w": 6.736, "lb": "", "tx": "me siento"}, {"k": "a", "x": 52.206, "y": 73.319, "w": 6.736, "lb": "", "tx": "ansiedad"}, {"k": "a", "x": 72.848, "y": 76.641, "w": 6.736, "lb": "", "tx": "frustrado/a"}, {"k": "a", "x": 51.112, "y": 79.963, "w": 6.736, "lb": "", "tx": "miedo"}, {"k": "a", "x": 51.294, "y": 83.285, "w": 6.736, "lb": "", "tx": "ilusión"}, {"k": "a", "x": 72.198, "y": 86.607, "w": 6.736, "lb": "", "tx": "ridículo/a"}, {"k": "a", "x": 53.138, "y": 89.929, "w": 6.736, "lb": "", "tx": "entusiasmo"}], "155": [{"k": "a", "x": 67.535, "y": 62.066, "w": 6.736, "lb": "", "tx": "b. Para entender a la gente va muy bien"}, {"k": "a", "x": 66.772, "y": 67.245, "w": 6.736, "lb": "", "tx": "c. Para hablar con fluidez lo mejor es"}, {"k": "a", "x": 63.948, "y": 69.834, "w": 6.736, "lb": "", "tx": "hablar con hispanohablantes."}, {"k": "a", "x": 67.082, "y": 72.424, "w": 6.736, "lb": "", "tx": "d. Para practicar los verbos tienes que"}, {"k": "a", "x": 62.196, "y": 75.013, "w": 6.736, "lb": "", "tx": "hacer muchos ejercicios."}, {"k": "a", "x": 66.351, "y": 80.192, "w": 6.736, "lb": "", "tx": "de las palabras, lo mejor es traducir."}, {"k": "a", "x": 66.881, "y": 82.781, "w": 6.736, "lb": "", "tx": "f. Para pronunciar mejor va muy bien"}, {"k": "a", "x": 67.813, "y": 87.96, "w": 6.736, "lb": "", "tx": "g. Para escribir correctamente lo mejor"}, {"k": "a", "x": 66.403, "y": 90.55, "w": 6.736, "lb": "", "tx": "es buscar palabras en el diccionario."}, {"k": "a", "x": 70.663, "y": 19.657, "w": 9.302, "lb": "b", "tx": "va"}, {"k": "a", "x": 83.237, "y": 35.981, "w": 9.302, "lb": "e", "tx": "va"}, {"k": "a", "x": 59.052, "y": 44.464, "w": 9.302, "lb": "g", "tx": "va"}, {"k": "a", "x": 51.289, "y": 16.52, "w": 9.302, "lb": "a", "tx": "cuesta"}, {"k": "a", "x": 58.972, "y": 25.107, "w": 9.302, "lb": "c", "tx": "cuestan"}, {"k": "a", "x": 64.344, "y": 30.505, "w": 9.302, "lb": "d", "tx": "cuesta"}, {"k": "a", "x": 61.441, "y": 41.353, "w": 9.302, "lb": "f", "tx": "cuesta"}, {"k": "a", "x": 72.267, "y": 47.627, "w": 9.302, "lb": "h", "tx": "cuestan"}], "156": [{"k": "a", "x": 58.619, "y": 17.52, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 59.509, "y": 20.657, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 60.631, "y": 23.732, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 59.448, "y": 26.703, "w": 6.736, "lb": "", "tx": "con"}, {"k": "a", "x": 57.236, "y": 29.702, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 59.88, "y": 32.785, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 59.391, "y": 35.92, "w": 6.736, "lb": "", "tx": "con"}, {"k": "a", "x": 32.103, "y": 37.471, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 64.548, "y": 39.102, "w": 6.736, "lb": "", "tx": "en"}, {"k": "a", "x": 60.161, "y": 42.239, "w": 6.736, "lb": "", "tx": "con"}, {"k": "a", "x": 38.022, "y": 45.501, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 53.361, "y": 54.272, "w": 6.736, "lb": "", "tx": "pronunciar"}, {"k": "a", "x": 23.127, "y": 57.265, "w": 6.736, "lb": "", "tx": "5"}, {"k": "a", "x": 72.386, "y": 57.224, "w": 6.736, "lb": "", "tx": "la memoria"}, {"k": "a", "x": 72.752, "y": 60.177, "w": 6.736, "lb": "", "tx": "la repetición"}, {"k": "a", "x": 72.983, "y": 63.13, "w": 6.736, "lb": "", "tx": "la traducción"}, {"k": "a", "x": 51.592, "y": 66.082, "w": 6.736, "lb": "", "tx": "buscar"}, {"k": "a", "x": 29.073, "y": 69.027, "w": 6.736, "lb": "", "tx": "4"}, {"k": "a", "x": 72.955, "y": 69.035, "w": 6.736, "lb": "", "tx": "la corrección"}, {"k": "a", "x": 51.985, "y": 71.987, "w": 6.736, "lb": "", "tx": "escribir"}, {"k": "a", "x": 50.474, "y": 74.94, "w": 6.736, "lb": "", "tx": "leer"}, {"k": "a", "x": 15.391, "y": 77.057, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 71.573, "y": 77.893, "w": 6.736, "lb": "", "tx": "el trabajo"}, {"k": "a", "x": 71.518, "y": 80.845, "w": 6.736, "lb": "", "tx": "el estudio"}, {"k": "a", "x": 52.053, "y": 83.798, "w": 6.736, "lb": "", "tx": "conocer"}], "157": [{"k": "a", "x": 6.675, "y": 32.98, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 48.668, "y": 33.198, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 48.668, "y": 41.571, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.675, "y": 43.414, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.675, "y": 49.403, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 48.668, "y": 49.619, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 28.836, "y": 30.623, "w": 11.227, "lb": "a", "tx": "salir a la pizarra"}, {"k": "a", "x": 25.292, "y": 38.844, "w": 11.227, "lb": "b", "tx": "los exámenes"}, {"k": "a", "x": 24.217, "y": 47.143, "w": 11.227, "lb": "c", "tx": "hablar con un nativo"}, {"k": "a", "x": 69.861, "y": 30.936, "w": 11.227, "lb": "d", "tx": "estas situaciones"}, {"k": "a", "x": 70.246, "y": 39.144, "w": 11.227, "lb": "e", "tx": "hablar en inglés por teléfono"}, {"k": "a", "x": 66.943, "y": 47.352, "w": 11.227, "lb": "f", "tx": "ir a vivir a un país extranjero"}], "158": [{"k": "a", "x": 26.969, "y": 20.943, "w": 6.736, "lb": "", "tx": "pintó"}, {"k": "a", "x": 32.292, "y": 26.471, "w": 6.736, "lb": "", "tx": "escribió"}, {"k": "a", "x": 40.958, "y": 31.987, "w": 6.736, "lb": "", "tx": "ganó"}, {"k": "a", "x": 26.295, "y": 37.516, "w": 6.736, "lb": "", "tx": "fue"}, {"k": "a", "x": 33.383, "y": 45.505, "w": 6.736, "lb": "", "tx": "grabaron"}, {"k": "a", "x": 26.576, "y": 51.019, "w": 6.736, "lb": "", "tx": "recibió"}, {"k": "a", "x": 25.493, "y": 57.645, "w": 6.736, "lb": "", "tx": "estuvo"}, {"k": "a", "x": 42.098, "y": 73.392, "w": 4.811, "lb": "", "tx": "pintar un cuadro, escalar una montaña, ganar un premio, ganar una medalla, ganar las elecciones, recibir un premio, una medalla, convertirse en presidente/a, convertirse en número uno"}], "159": [{"k": "a", "x": 78.58, "y": 19.973, "w": 6.736, "lb": "", "tx": "comí"}, {"k": "a", "x": 67.906, "y": 22.408, "w": 6.736, "lb": "", "tx": "estudiaste"}, {"k": "a", "x": 79.046, "y": 25.032, "w": 6.736, "lb": "", "tx": "comió"}, {"k": "a", "x": 68.418, "y": 27.467, "w": 6.736, "lb": "", "tx": "estudiamos"}, {"k": "a", "x": 83.024, "y": 31.021, "w": 6.736, "lb": "", "tx": "comisteis"}, {"k": "a", "x": 68.163, "y": 32.526, "w": 6.736, "lb": "", "tx": "estudiaron"}, {"k": "a", "x": 19.019, "y": 33.873, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 40.19, "y": 33.873, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 18.86, "y": 36.896, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 40.349, "y": 36.896, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 78.273, "y": 38.82, "w": 6.736, "lb": "", "tx": "hice"}, {"k": "a", "x": 19.019, "y": 39.92, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 40.349, "y": 39.92, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 68.41, "y": 41.255, "w": 6.736, "lb": "", "tx": "descubriste"}, {"k": "a", "x": 18.86, "y": 42.943, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 40.19, "y": 42.943, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 78.245, "y": 43.879, "w": 6.736, "lb": "", "tx": "hizo"}, {"k": "a", "x": 18.86, "y": 45.967, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 40.19, "y": 45.967, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 68.921, "y": 46.314, "w": 6.736, "lb": "", "tx": "descubrimos"}, {"k": "a", "x": 19.019, "y": 48.991, "w": 6.736, "lb": "", "tx": "P"}, {"k": "a", "x": 40.349, "y": 48.991, "w": 6.736, "lb": "", "tx": "I"}, {"k": "a", "x": 79.845, "y": 48.938, "w": 6.736, "lb": "", "tx": "hicisteis"}, {"k": "a", "x": 69.099, "y": 51.373, "w": 6.736, "lb": "", "tx": "descubrieron"}, {"k": "w", "x": 88.3, "y": 63.687, "w": 11.2, "lb": "", "tx": "presente"}, {"k": "w", "x": 88.3, "y": 66.538, "w": 11.2, "lb": "", "tx": "indefinido"}, {"k": "w", "x": 88.3, "y": 70.308, "w": 11.2, "lb": "", "tx": "indefinido"}, {"k": "w", "x": 88.3, "y": 74.99, "w": 11.2, "lb": "", "tx": "presente"}, {"k": "w", "x": 88.3, "y": 78.711, "w": 11.2, "lb": "", "tx": "presente"}, {"k": "w", "x": 88.3, "y": 81.591, "w": 11.2, "lb": "", "tx": "indefinido"}, {"k": "w", "x": 88.3, "y": 84.496, "w": 11.2, "lb": "", "tx": "presente"}, {"k": "w", "x": 88.3, "y": 87.344, "w": 11.2, "lb": "", "tx": "indefinido"}], "160": [{"k": "a", "x": 67.244, "y": 16.63, "w": 6.736, "lb": "", "tx": "d"}, {"k": "a", "x": 67.376, "y": 19.034, "w": 6.736, "lb": "", "tx": "g"}, {"k": "a", "x": 67.376, "y": 21.6, "w": 6.736, "lb": "", "tx": "i"}, {"k": "a", "x": 67.244, "y": 24.057, "w": 6.736, "lb": "", "tx": "c"}, {"k": "a", "x": 67.244, "y": 26.567, "w": 6.736, "lb": "", "tx": "f"}, {"k": "a", "x": 67.244, "y": 29.091, "w": 6.736, "lb": "", "tx": "h a"}, {"k": "a", "x": 67.376, "y": 34.006, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 67.376, "y": 36.505, "w": 6.736, "lb": "", "tx": "e"}, {"k": "a", "x": 9.866, "y": 57.631, "w": 6.736, "lb": "", "tx": "ganaste"}, {"k": "a", "x": 25.487, "y": 57.631, "w": 6.736, "lb": "", "tx": "naciste"}, {"k": "a", "x": 41.926, "y": 57.631, "w": 6.736, "lb": "", "tx": "recibiste"}, {"k": "a", "x": 56.959, "y": 57.631, "w": 6.736, "lb": "", "tx": "viviste"}, {"k": "a", "x": 73.821, "y": 57.631, "w": 6.736, "lb": "", "tx": "obtuviste"}, {"k": "a", "x": 8.756, "y": 60.424, "w": 6.736, "lb": "", "tx": "ganó"}, {"k": "a", "x": 24.858, "y": 60.424, "w": 6.736, "lb": "", "tx": "nació"}, {"k": "a", "x": 41.296, "y": 60.424, "w": 6.736, "lb": "", "tx": "recibió"}, {"k": "a", "x": 56.329, "y": 60.424, "w": 6.736, "lb": "", "tx": "vivió"}, {"k": "a", "x": 72.927, "y": 60.424, "w": 6.736, "lb": "", "tx": "obtuvo"}, {"k": "a", "x": 10.5, "y": 66.011, "w": 6.736, "lb": "", "tx": "ganasteis"}, {"k": "a", "x": 26.121, "y": 66.011, "w": 6.736, "lb": "", "tx": "nacisteis"}, {"k": "a", "x": 42.559, "y": 66.011, "w": 6.736, "lb": "", "tx": "recibisteis"}, {"k": "a", "x": 57.592, "y": 66.011, "w": 6.736, "lb": "", "tx": "vivisteis"}, {"k": "a", "x": 74.454, "y": 66.011, "w": 6.736, "lb": "", "tx": "obtuvisteis"}, {"k": "a", "x": 10.12, "y": 68.805, "w": 6.736, "lb": "", "tx": "ganaron"}, {"k": "a", "x": 26.168, "y": 68.805, "w": 6.736, "lb": "", "tx": "nacieron"}, {"k": "a", "x": 42.606, "y": 68.805, "w": 6.736, "lb": "", "tx": "recibieron"}, {"k": "a", "x": 57.639, "y": 68.805, "w": 6.736, "lb": "", "tx": "vivieron"}, {"k": "a", "x": 74.501, "y": 68.805, "w": 6.736, "lb": "", "tx": "obtuvieron"}, {"k": "a", "x": 9.003, "y": 77.493, "w": 6.736, "lb": "", "tx": "inicié"}, {"k": "a", "x": 27.345, "y": 77.493, "w": 6.736, "lb": "", "tx": "protagonicé"}, {"k": "a", "x": 40.72, "y": 77.493, "w": 6.736, "lb": "", "tx": "dirigí"}, {"k": "a", "x": 57.272, "y": 77.493, "w": 6.736, "lb": "", "tx": "trabajé"}, {"k": "a", "x": 73.769, "y": 77.493, "w": 6.736, "lb": "", "tx": "compuse"}, {"k": "a", "x": 9.026, "y": 82.967, "w": 6.736, "lb": "", "tx": "inició"}, {"k": "a", "x": 27.317, "y": 82.967, "w": 6.736, "lb": "", "tx": "protagonizó"}, {"k": "a", "x": 41.18, "y": 82.967, "w": 6.736, "lb": "", "tx": "dirigió"}, {"k": "a", "x": 57.295, "y": 82.967, "w": 6.736, "lb": "", "tx": "trabajó"}, {"k": "a", "x": 73.793, "y": 82.967, "w": 6.736, "lb": "", "tx": "compuso"}, {"k": "a", "x": 10.642, "y": 85.704, "w": 6.736, "lb": "", "tx": "iniciamos"}, {"k": "a", "x": 28.933, "y": 85.704, "w": 6.736, "lb": "", "tx": "protagonizamos"}, {"k": "a", "x": 42.314, "y": 85.704, "w": 6.736, "lb": "", "tx": "dirigimos"}, {"k": "a", "x": 58.91, "y": 85.704, "w": 6.736, "lb": "", "tx": "trabajamos"}, {"k": "a", "x": 75.191, "y": 85.704, "w": 6.736, "lb": "", "tx": "compusimos"}, {"k": "a", "x": 10.39, "y": 91.179, "w": 6.736, "lb": "", "tx": "iniciaron"}, {"k": "a", "x": 28.681, "y": 91.179, "w": 6.736, "lb": "", "tx": "protagonizaron"}, {"k": "a", "x": 42.49, "y": 91.179, "w": 6.736, "lb": "", "tx": "dirigieron"}, {"k": "a", "x": 58.659, "y": 91.179, "w": 6.736, "lb": "", "tx": "trabajaron"}, {"k": "a", "x": 75.367, "y": 91.179, "w": 6.736, "lb": "", "tx": "compusieron"}], "161": [{"k": "d", "x": 12.118, "y": 46.344, "w": 7.377, "lb": "57", "fl": ["auint_plus_2_57.mp3"]}, {"k": "tr", "x": 19.817, "y": 46.344, "w": 9.302, "lb": "تفريغ", "track": 57}, {"k": "a", "x": 37.968, "y": 19.509, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 42.943, "y": 22.42, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 48.591, "y": 25.888, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 37.968, "y": 26.194, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 42.943, "y": 35.484, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 37.968, "y": 40.049, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 50.122, "y": 41.623, "w": 6.736, "lb": "", "tx": "8"}, {"k": "a", "x": 62.835, "y": 41.623, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 76.814, "y": 41.623, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 69.036, "y": 45.047, "w": 6.736, "lb": "", "tx": "7"}, {"k": "a", "x": 50.122, "y": 48.616, "w": 6.736, "lb": "", "tx": "5/6"}, {"k": "a", "x": 70.356, "y": 48.616, "w": 6.736, "lb": "", "tx": "4"}, {"k": "a", "x": 50.122, "y": 52.013, "w": 6.736, "lb": "", "tx": "5/6"}, {"k": "a", "x": 6.616, "y": 56.008, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.616, "y": 73.359, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.616, "y": 88.992, "w": 6.736, "lb": "", "tx": "x"}], "162": [{"k": "a", "x": 7.416, "y": 18.429, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 28.254, "y": 24.662, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 7.416, "y": 31.016, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 7.416, "y": 37.37, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 7.416, "y": 43.833, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 28.254, "y": 50.144, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 7.416, "y": 56.759, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 7.416, "y": 65.375, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 64.059, "y": 67.396, "w": 6.736, "lb": "", "tx": "empezó a"}, {"k": "a", "x": 64.059, "y": 72.689, "w": 6.736, "lb": "", "tx": "empezó"}, {"k": "a", "x": 28.254, "y": 73.716, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 69.717, "y": 76.052, "w": 6.736, "lb": "", "tx": "empezaron a"}, {"k": "a", "x": 7.416, "y": 79.61, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 60.456, "y": 81.51, "w": 6.736, "lb": "", "tx": "empezó a"}, {"k": "a", "x": 61.721, "y": 86.676, "w": 6.736, "lb": "", "tx": "empezó a"}, {"k": "a", "x": 22.858, "y": 15.462, "w": 8.502, "tx": "hasta"}, {"k": "a", "x": 29.836, "y": 21.591, "w": 8.502, "tx": "desde"}, {"k": "a", "x": 26.483, "y": 27.865, "w": 7.379, "tx": "hace"}, {"k": "a", "x": 24.061, "y": 34.387, "w": 8.502, "tx": "hasta"}, {"k": "a", "x": 27.125, "y": 40.686, "w": 8.502, "tx": "hasta"}, {"k": "a", "x": 26.884, "y": 47.091, "w": 7.379, "tx": "hace"}, {"k": "a", "x": 19.064, "y": 53.678, "w": 8.502, "tx": "desde"}], "163": [{"k": "a", "x": 6.744, "y": 39.276, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 6.744, "y": 42.25, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 6.743, "y": 53.201, "w": 6.736, "lb": "", "tx": "d"}, {"k": "a", "x": 6.744, "y": 55.847, "w": 6.736, "lb": "", "tx": "c"}, {"k": "a", "x": 60.636, "y": 71.673, "w": 6.736, "lb": "", "tx": "Empezó a trabajar en 1982. Pasó su infancia en Madrid. Hizo la carrera de Ciencias Químicas. Se jubiló en el año 2015. Tuvo un hijo. Se divorció de Jaime en 1995. Se casó con Jaime en 1980. Se fue a Nueva York a hacer un doctorado. Se fue a vivir con Damián en 1999."}], "164": [{"k": "a", "x": 38.995, "y": 20.468, "w": 6.736, "lb": "", "tx": "Nació"}, {"k": "a", "x": 81.104, "y": 20.468, "w": 6.736, "lb": "", "tx": "se fue se sintió"}, {"k": "a", "x": 65.631, "y": 24.046, "w": 6.736, "lb": "", "tx": "aprendió empezó"}, {"k": "a", "x": 42.477, "y": 33.266, "w": 6.736, "lb": "", "tx": "Empezó"}, {"k": "a", "x": 71.789, "y": 33.266, "w": 6.736, "lb": "", "tx": "consiguió mantuvo"}, {"k": "a", "x": 56.162, "y": 40.482, "w": 6.736, "lb": "", "tx": "tuvo"}, {"k": "a", "x": 48.117, "y": 42.3, "w": 6.736, "lb": "", "tx": "estuvo"}, {"k": "a", "x": 44.185, "y": 49.642, "w": 6.736, "lb": "", "tx": "regresó"}, {"k": "a", "x": 80.487, "y": 51.522, "w": 6.736, "lb": "", "tx": "colaboró"}, {"k": "a", "x": 40.652, "y": 55.162, "w": 6.736, "lb": "", "tx": "hizo se publicó"}, {"k": "a", "x": 50.765, "y": 58.861, "w": 6.736, "lb": "", "tx": "Murió"}, {"k": "a", "x": 64.747, "y": 71.142, "w": 6.736, "lb": "", "tx": "película biográfica"}, {"k": "a", "x": 57.793, "y": 76.494, "w": 6.736, "lb": "", "tx": "actuar"}, {"k": "a", "x": 67.647, "y": 82.201, "w": 6.736, "lb": "", "tx": "estrenar"}, {"k": "a", "x": 64.577, "y": 87.399, "w": 6.736, "lb": "", "tx": "largometraje"}], "165": [{"k": "a", "x": 25.941, "y": 71.516, "w": 6.736, "lb": "", "tx": "conozco"}, {"k": "a", "x": 38.315, "y": 71.516, "w": 6.736, "lb": "", "tx": "me visto"}, {"k": "a", "x": 25.923, "y": 74.498, "w": 6.736, "lb": "", "tx": "conoces"}, {"k": "a", "x": 38.178, "y": 74.498, "w": 6.736, "lb": "", "tx": "te vistes"}, {"k": "a", "x": 25.55, "y": 77.48, "w": 6.736, "lb": "", "tx": "conoce"}, {"k": "a", "x": 37.891, "y": 77.48, "w": 6.736, "lb": "", "tx": "se viste"}, {"k": "a", "x": 27.152, "y": 80.462, "w": 6.736, "lb": "", "tx": "conocemos"}, {"k": "a", "x": 40.021, "y": 80.462, "w": 6.736, "lb": "", "tx": "nos vestimos"}, {"k": "a", "x": 26.191, "y": 83.444, "w": 6.736, "lb": "", "tx": "conocéis"}, {"k": "a", "x": 38.277, "y": 83.444, "w": 6.736, "lb": "", "tx": "os vestís"}, {"k": "a", "x": 26.055, "y": 86.426, "w": 6.736, "lb": "", "tx": "conocen"}, {"k": "a", "x": 38.395, "y": 86.426, "w": 6.736, "lb": "", "tx": "se visten"}, {"k": "a", "x": 67.234, "y": 89.056, "w": 6.736, "lb": "", "tx": "d g a e f c h b j i"}], "166": [{"k": "d", "x": 53.148, "y": 10.986, "w": 7.377, "lb": "58", "fl": ["auint_plus_2_58.mp3"]}, {"k": "tr", "x": 60.846, "y": 10.986, "w": 9.302, "lb": "تفريغ", "track": 58}, {"k": "a", "x": 66.684, "y": 17.52, "w": 6.736, "lb": "", "tx": "me parezco"}, {"k": "a", "x": 62.883, "y": 24.673, "w": 6.736, "lb": "", "tx": "parece"}, {"k": "a", "x": 6.561, "y": 24.708, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.561, "y": 31.502, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 60.144, "y": 31.825, "w": 6.736, "lb": "", "tx": "te pareces"}, {"k": "a", "x": 62.238, "y": 36.83, "w": 6.736, "lb": "", "tx": "se parece"}, {"k": "a", "x": 82.684, "y": 41.862, "w": 6.736, "lb": "", "tx": "parece"}, {"k": "a", "x": 6.561, "y": 42.053, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 6.561, "y": 48.845, "w": 6.736, "lb": "", "tx": "x"}, {"k": "a", "x": 31.984, "y": 60.054, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 23.713, "y": 66.154, "w": 6.736, "lb": "", "tx": "d"}, {"k": "a", "x": 80.63, "y": 70.783, "w": 6.736, "lb": "", "tx": "Soy"}, {"k": "a", "x": 28.715, "y": 71.662, "w": 6.736, "lb": "", "tx": "c"}, {"k": "a", "x": 64.782, "y": 74.483, "w": 6.736, "lb": "", "tx": "Estoy"}, {"k": "a", "x": 55.79, "y": 76.304, "w": 6.736, "lb": "", "tx": "tengo"}, {"k": "a", "x": 23.352, "y": 77.057, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 56.215, "y": 79.941, "w": 6.736, "lb": "", "tx": "Soy"}, {"k": "a", "x": 72.005, "y": 81.762, "w": 6.736, "lb": "", "tx": "Tengo"}, {"k": "a", "x": 28.946, "y": 82.578, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 82.661, "y": 83.581, "w": 6.736, "lb": "", "tx": "llevo"}, {"k": "a", "x": 21.397, "y": 88.036, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 56.215, "y": 90.92, "w": 6.736, "lb": "", "tx": "tienen"}], "167": [{"k": "a", "x": 22.257, "y": 34.725, "w": 6.736, "lb": "", "tx": "Javier"}, {"k": "a", "x": 13.286, "y": 36.252, "w": 6.736, "lb": "", "tx": "Ana"}, {"k": "a", "x": 33.035, "y": 39.954, "w": 6.736, "lb": "", "tx": "Alberto"}, {"k": "a", "x": 11.545, "y": 44.565, "w": 6.736, "lb": "", "tx": "Rosa"}, {"k": "a", "x": 20.784, "y": 45.731, "w": 6.736, "lb": "", "tx": "Mario"}, {"k": "a", "x": 60.628, "y": 50.583, "w": 6.736, "lb": "", "tx": "el de"}, {"k": "a", "x": 67.017, "y": 52.465, "w": 6.736, "lb": "", "tx": "el que"}, {"k": "a", "x": 57.77, "y": 56.102, "w": 6.736, "lb": "", "tx": "el"}, {"k": "a", "x": 64.4, "y": 67.081, "w": 6.736, "lb": "", "tx": "los de"}, {"k": "a", "x": 72.37, "y": 68.839, "w": 6.736, "lb": "", "tx": "los que"}, {"k": "a", "x": 58.723, "y": 70.783, "w": 6.736, "lb": "", "tx": "los"}, {"k": "a", "x": 54.886, "y": 81.601, "w": 6.736, "lb": "", "tx": "La que"}, {"k": "a", "x": 54.956, "y": 87.22, "w": 6.736, "lb": "", "tx": "La"}, {"k": "a", "x": 71.273, "y": 87.22, "w": 6.736, "lb": "", "tx": "La de"}], "168": [{"k": "a", "x": 52.805, "y": 15.42, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 17.827, "y": 15.827, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 23.585, "y": 22.225, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 62.053, "y": 23.669, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 18.38, "y": 28.625, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 83.467, "y": 44.827, "w": 6.736, "lb": "", "tx": "Estos"}, {"k": "a", "x": 82.798, "y": 53.354, "w": 6.736, "lb": "", "tx": "Este"}, {"k": "a", "x": 10.403, "y": 55.145, "w": 6.736, "lb": "", "tx": "Este"}, {"k": "a", "x": 12.142, "y": 64.312, "w": 6.736, "lb": "", "tx": "Esa"}, {"k": "a", "x": 75.839, "y": 64.312, "w": 6.736, "lb": "", "tx": "Esta"}, {"k": "a", "x": 70.549, "y": 70.892, "w": 6.736, "lb": "", "tx": "Esta"}, {"k": "a", "x": 68.179, "y": 78.105, "w": 6.736, "lb": "", "tx": "este / ese"}, {"k": "a", "x": 44.991, "y": 86.325, "w": 6.736, "lb": "", "tx": "ese"}, {"k": "a", "x": 42.523, "y": 89.962, "w": 6.736, "lb": "", "tx": "ese / aquel"}], "169": [{"k": "a", "x": 69.957, "y": 30.813, "w": 6.736, "lb": "", "tx": "Está viuda."}, {"k": "a", "x": 70.11, "y": 38.8, "w": 6.736, "lb": "", "tx": "Está casada."}, {"k": "a", "x": 22.531, "y": 47.81, "w": 6.736, "lb": "", "tx": "Mido uno sesenta y cinco y peso setenta y dos kilos."}, {"k": "a", "x": 71.493, "y": 49.655, "w": 6.736, "lb": "", "tx": "Está divorciado."}, {"k": "a", "x": 71.763, "y": 63.011, "w": 6.736, "lb": "", "tx": "Sale con alguien."}, {"k": "a", "x": 21.218, "y": 68.003, "w": 6.736, "lb": "", "tx": "Mido dos diez y peso ciento cinco kilos."}, {"k": "a", "x": 80.188, "y": 75.603, "w": 6.736, "lb": "", "tx": "Tiene novia / pareja / una relación seria."}, {"k": "a", "x": 80.157, "y": 90.939, "w": 6.736, "lb": "", "tx": "Tiene novio / pareja / una relación seria."}], "170": [{"k": "a", "x": 51.544, "y": 90.25, "w": 6.736, "lb": "", "tx": "c"}, {"k": "a", "x": 58.31, "y": 91.85, "w": 6.736, "lb": "", "tx": "b"}, {"k": "a", "x": 65.076, "y": 90.25, "w": 6.736, "lb": "", "tx": "e"}, {"k": "a", "x": 71.842, "y": 91.85, "w": 6.736, "lb": "", "tx": "d"}, {"k": "a", "x": 78.608, "y": 90.25, "w": 6.736, "lb": "", "tx": "a"}, {"k": "a", "x": 48.314, "y": 44.949, "w": 4.811, "lb": "", "tx": "tener pareja, tener un vestido rojo, tener el pelo largo, tener los ojos grandes, llevar el pelo largo, ser alto/a, ser tímido/a, ser simpático/a, ser rubio/a, parecer tímido/a, parecer simpático/a, parecerse a su madre / padre, parecerse a una persona famosa, llevarse bien con todo el mundo, estar soltero/a, divorciado/a"}, {"k": "a", "x": 37.567, "y": 19.814, "w": 9.624, "tx": "Leonor"}, {"k": "a", "x": 63.408, "y": 22.454, "w": 8.502, "tx": "Pablo"}, {"k": "a", "x": 68.341, "y": 25.46, "w": 7.379, "tx": "Sara"}, {"k": "a", "x": 28.247, "y": 29.734, "w": 9.624, "tx": "Víctor"}, {"k": "a", "x": 70.843, "y": 33.616, "w": 9.624, "tx": "Leonor"}, {"k": "a", "x": 69.223, "y": 36.386, "w": 9.624, "tx": "Rafael"}, {"k": "a", "x": 72.487, "y": 39.079, "w": 11.87, "tx": "Verónica"}], "171": [{"k": "a", "x": 57.526, "y": 11.049, "w": 4.811, "lb": "", "tx": "mía míos mías tuyo tuyos tuyas suyo suya suyos suyas nuestros nuestra nuestro vuestra vuestros vuestras suya suyas suyo"}, {"k": "a", "x": 26.54, "y": 57.984, "w": 6.736, "lb": "", "tx": "mío mía"}, {"k": "a", "x": 57.414, "y": 49.077, "w": 4.811, "lb": "", "tx": "tuya vuestros"}, {"k": "a", "x": 78.158, "y": 49.014, "w": 4.811, "lb": "", "tx": "nuestra suyos"}, {"k": "a", "x": 62.681, "y": 57.984, "w": 6.736, "lb": "", "tx": "tuyo mías"}], "172": [{"k": "a", "x": 65.779, "y": 19.331, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 65.785, "y": 22.405, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 65.675, "y": 25.48, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 65.785, "y": 29.176, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 65.779, "y": 32.25, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 65.675, "y": 35.325, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 65.779, "y": 39.638, "w": 6.736, "lb": "", "tx": "3"}, {"k": "a", "x": 65.785, "y": 42.713, "w": 6.736, "lb": "", "tx": "2"}, {"k": "a", "x": 65.675, "y": 45.787, "w": 6.736, "lb": "", "tx": "1"}, {"k": "a", "x": 21.593, "y": 70.304, "w": 6.736, "lb": "", "tx": "Orientación, precio, conexión con el transporte público, servicios que hay cerca, garaje, año de construcción, precio…"}], "173": [{"k": "d", "x": 10.88, "y": 53.711, "w": 7.377, "lb": "59", "fl": ["auint_plus_2_59.mp3"]}, {"k": "tr", "x": 18.578, "y": 53.711, "w": 9.302, "lb": "تفريغ", "track": 59}, {"k": "a", "x": 92.623, "y": 3.202, "w": 4.811, "lb": "", "tx": "(1) lámpara de techo de estilo industrial, (1) estantería blanca de madera, (2) cojines amarillos de tela, (3) mesa de centro (2) butaca amarilla de madera, (3) sillas de rectangular de madera, (4) planta, (5) alfombra madera, (4) cuadros, (5) sofá gris de tela de tejidos naturales"}, {"k": "a", "x": 92.623, "y": 4.802, "w": 4.811, "lb": "", "tx": "No hay una lámpara al lado de la mesa. La lámpara está delante del frigorífico. No hay una televisión encima de la mesa. La televisión está en el suelo. El microondas no está encima del sofá. El microondas está encima de la alfombra."}], "174": [{"k": "a", "x": 25.113, "y": 22.134, "w": 6.736, "lb": "", "tx": "El barrio donde vivo está bastante bien, pero el"}, {"k": "a", "x": 15.815, "y": 24.632, "w": 6.736, "lb": "", "tx": "suyo es más tranquilo."}, {"k": "a", "x": 18.5, "y": 36.423, "w": 6.736, "lb": "", "tx": "pero la tuya es más moderna."}, {"k": "a", "x": 24.953, "y": 45.716, "w": 6.736, "lb": "", "tx": "Me encanta tu sofá. El mío está un poco viejo y"}, {"k": "a", "x": 74.436, "y": 47.446, "w": 6.736, "lb": "", "tx": "es"}, {"k": "a", "x": 16.562, "y": 48.214, "w": 6.736, "lb": "", "tx": "quiero comprarme otro."}, {"k": "a", "x": 61.305, "y": 49.704, "w": 6.736, "lb": "", "tx": "tiene"}, {"k": "a", "x": 80.55, "y": 49.704, "w": 6.736, "lb": "", "tx": "es"}, {"k": "a", "x": 66.387, "y": 52.025, "w": 6.736, "lb": "", "tx": "Tiene"}, {"k": "a", "x": 62.058, "y": 56.41, "w": 6.736, "lb": "", "tx": "da a la"}, {"k": "a", "x": 73.324, "y": 56.41, "w": 6.736, "lb": "", "tx": "Está"}, {"k": "a", "x": 23.656, "y": 57.507, "w": 6.736, "lb": "", "tx": "Esta terraza es muy grande. La mía es más"}, {"k": "a", "x": 19.439, "y": 60.005, "w": 6.736, "lb": "", "tx": "pequeña, pero hay menos ruido."}, {"k": "a", "x": 77.964, "y": 61.741, "w": 6.736, "lb": "", "tx": "Es"}, {"k": "a", "x": 61.303, "y": 64.51, "w": 6.736, "lb": "", "tx": "Tiene"}, {"k": "a", "x": 77.761, "y": 69.215, "w": 6.736, "lb": "", "tx": "tiene"}, {"k": "a", "x": 24.725, "y": 69.403, "w": 6.736, "lb": "", "tx": "Mira, este es mi armario y este es el tuyo. Pue­"}, {"k": "a", "x": 80.705, "y": 71.473, "w": 6.736, "lb": "", "tx": "da a"}, {"k": "a", "x": 16.06, "y": 71.902, "w": 6.736, "lb": "", "tx": "des poner tu ropa aquí."}, {"k": "a", "x": 82.991, "y": 73.92, "w": 6.736, "lb": "", "tx": "da al"}, {"k": "a", "x": 59.885, "y": 76.24, "w": 6.736, "lb": "", "tx": "Está"}, {"k": "a", "x": 84.636, "y": 79.377, "w": 6.736, "lb": "", "tx": "tiene"}, {"k": "a", "x": 54.973, "y": 84.146, "w": 6.736, "lb": "", "tx": "Está"}, {"k": "a", "x": 84.184, "y": 84.146, "w": 6.736, "lb": "", "tx": "está"}, {"k": "a", "x": 82.993, "y": 85.841, "w": 6.736, "lb": "", "tx": "tiene"}, {"k": "a", "x": 71.563, "y": 88.851, "w": 6.736, "lb": "", "tx": "Está"}, {"k": "a", "x": 66.023, "y": 91.11, "w": 6.736, "lb": "", "tx": "es"}], "175": [{"k": "a", "x": 23.901, "y": 17.144, "w": 6.736, "lb": "", "tx": "La casa de Pepe es más pequeña que la de Julio."}, {"k": "a", "x": 22.723, "y": 19.647, "w": 6.736, "lb": "", "tx": "La casa de Pepe es más barata que la de Julio."}, {"k": "a", "x": 24.788, "y": 22.15, "w": 6.736, "lb": "", "tx": "La terraza de Julio es más pequeña que la de Pepe."}, {"k": "a", "x": 25.776, "y": 24.653, "w": 6.736, "lb": "", "tx": "La casa de Pepe tiene tantos balcones como la de Julio."}, {"k": "a", "x": 24.625, "y": 27.156, "w": 6.736, "lb": "", "tx": "La casa de Julio tiene un baño más que la de Pepe."}, {"k": "a", "x": 25.703, "y": 29.659, "w": 6.736, "lb": "", "tx": "La casa de Julio está 7 minutos más cerca del centro"}, {"k": "a", "x": 11.739, "y": 32.162, "w": 6.736, "lb": "", "tx": "que la de Pepe.."}, {"k": "a", "x": 43.736, "y": 67.583, "w": 6.736, "lb": "", "tx": "más"}, {"k": "a", "x": 43.736, "y": 69.183, "w": 6.736, "lb": "", "tx": "que"}, {"k": "a", "x": 31.254, "y": 72.899, "w": 6.736, "lb": "", "tx": "tan"}, {"k": "a", "x": 42.552, "y": 72.899, "w": 6.736, "lb": "", "tx": "como"}, {"k": "a", "x": 51.172, "y": 76.052, "w": 6.736, "lb": "", "tx": "más"}, {"k": "a", "x": 71.534, "y": 76.179, "w": 6.736, "lb": "", "tx": "que"}, {"k": "a", "x": 70.253, "y": 81.574, "w": 6.736, "lb": "", "tx": "menos"}, {"k": "a", "x": 70.253, "y": 83.174, "w": 6.736, "lb": "", "tx": "que"}, {"k": "a", "x": 47.476, "y": 86.965, "w": 6.736, "lb": "", "tx": "más"}, {"k": "a", "x": 65.565, "y": 86.965, "w": 6.736, "lb": "", "tx": "que"}], "176": [{"k": "a", "x": 13.336, "y": 58.147, "w": 6.736, "lb": "", "tx": "plantas cuadro espejo estantería"}, {"k": "a", "x": 24.237, "y": 58.147, "w": 6.736, "lb": "", "tx": "bañera lavadora espejo"}, {"k": "a", "x": 37.391, "y": 58.147, "w": 6.736, "lb": "", "tx": "mesilla de noche armario espejo"}, {"k": "a", "x": 50.5, "y": 58.147, "w": 6.736, "lb": "", "tx": "plantas mesa"}, {"k": "a", "x": 36.577, "y": 73.326, "w": 6.736, "lb": "", "tx": "plantas sillón lámpara mesa estantería"}, {"k": "a", "x": 48.261, "y": 73.326, "w": 6.736, "lb": "", "tx": "equipo de música cuadro televisor"}, {"k": "a", "x": 14.66, "y": 76.729, "w": 6.736, "lb": "", "tx": "cafetera mesa"}, {"k": "a", "x": 22.881, "y": 76.729, "w": 6.736, "lb": "", "tx": "horno lavadora"}], "177": [{"k": "a", "x": 59.922, "y": 24.046, "w": 6.736, "lb": "", "tx": "Te gusta"}, {"k": "a", "x": 12.899, "y": 26.563, "w": 6.736, "lb": "", "tx": "un frigorífico un sillón un equipo de música un armario un cuadro un espejo un horno un televisor"}, {"k": "a", "x": 31.269, "y": 26.563, "w": 6.736, "lb": "", "tx": "unas plantas una cafetera una mesa una estantería una bañera una mesilla de noche una lavadora"}, {"k": "a", "x": 68.415, "y": 27.81, "w": 6.736, "lb": "", "tx": "prefiero"}, {"k": "a", "x": 74.745, "y": 34.986, "w": 6.736, "lb": "", "tx": "le gusta me encanta"}, {"k": "a", "x": 56.878, "y": 42.375, "w": 6.736, "lb": "", "tx": "prefiere"}, {"k": "a", "x": 62.482, "y": 51.522, "w": 6.736, "lb": "", "tx": "os gusta"}, {"k": "a", "x": 65.132, "y": 57.045, "w": 6.736, "lb": "", "tx": "nos encanta"}, {"k": "a", "x": 73.414, "y": 64.384, "w": 6.736, "lb": "", "tx": "les encantan"}, {"k": "a", "x": 16.734, "y": 67.437, "w": 6.736, "lb": "", "tx": "de madera"}, {"k": "a", "x": 34.442, "y": 67.437, "w": 6.736, "lb": "", "tx": "de cristal"}, {"k": "a", "x": 77.144, "y": 69.905, "w": 6.736, "lb": "", "tx": "nos gustan"}, {"k": "a", "x": 15.936, "y": 77.815, "w": 6.736, "lb": "", "tx": "de tela"}, {"k": "a", "x": 32.712, "y": 77.815, "w": 6.736, "lb": "", "tx": "de piel"}, {"k": "a", "x": 74.468, "y": 78.938, "w": 6.736, "lb": "", "tx": "le encantan"}, {"k": "a", "x": 70.18, "y": 82.703, "w": 6.736, "lb": "", "tx": "te gustan"}, {"k": "a", "x": 15.802, "y": 89.726, "w": 6.736, "lb": "", "tx": "de plástico"}, {"k": "a", "x": 32.578, "y": 89.726, "w": 6.736, "lb": "", "tx": "de metal"}], "178": [], "1284": [], "1285": [], "1286": [], "1287": [], "1288": [], "1289": [], "1290": [], "1291": [], "1292": [], "1293": [], "1294": [], "1295": [], "1296": [], "1297": [], "1298": [], "1299": [], "1300": [], "1301": [], "1302": [], "1303": [], "2316": [], "2317": [], "2318": [], "2320": [], "2321": [], "2322": [], "2323": [], "2324": [], "2325": [], "2326": [], "2327": [], "2348": [], "2349": [], "3348": [], "4348": []};
+const IDX = {"u1": {"n": [{"n": 1, "t": "CUATRO LENGUAS EN CASA", "p": 11, "r": "إضافي"}, {"n": 2, "t": "ENTREVISTA EN LA ESCUELA", "p": 12, "r": "حصة"}, {"n": 3, "t": "¿CÓMO APRENDES?", "p": 13, "r": "بيت"}, {"n": 4, "t": "LOS NUEVOS ESPAÑOLES", "p": 14, "r": "حصة"}, {"n": 5, "t": "ESTUDIO ESPAÑOL DESDE HACE DOS AÑOS", "p": 15, "r": "إضافي"}, {"n": 6, "t": "ME SIENTO RIDÍCULO CUANDO HABLO ESPAÑOL", "p": 16, "r": "حصة"}, {"n": 7, "t": "ME CUESTA", "p": 17, "r": "حصة"}, {"n": 8, "t": "VA BIEN HABLAR MUCHO", "p": 17, "r": "حصة"}, {"n": 9, "t": "MI BIOGRAFÍA LINGÜÍSTICA", "p": 20, "r": "بيت"}, {"n": 10, "t": "ME SIENTO SEGURA CUANDO TRABAJO EN GRUPO", "p": 21, "r": "حصة"}, {"n": 11, "t": "¿DESDE CUÁNDO HACES YOGA?", "p": 21, "r": "إضافي"}, {"n": 12, "t": "DIME CÓMO APRENDES Y…", "p": 22, "r": "حصة"}, {"n": 13, "t": "IRSE A VIVIR A OTRO PAÍS", "p": 23, "r": "بيت"}], "t": [{"n": 2, "t": "ENTREVISTA EN LA ESCUELA", "p": 12, "r": "حصة"}, {"n": 4, "t": "LOS NUEVOS ESPAÑOLES", "p": 14, "r": "حصة"}, {"n": 6, "t": "ME SIENTO RIDÍCULO CUANDO HABLO ESPAÑOL", "p": 16, "r": "حصة"}, {"n": 7, "t": "ME CUESTA", "p": 17, "r": "حصة"}, {"n": 8, "t": "VA BIEN HABLAR MUCHO", "p": 17, "r": "حصة"}, {"n": 10, "t": "ME SIENTO SEGURA CUANDO TRABAJO EN GRUPO", "p": 21, "r": "حصة"}, {"n": 12, "t": "DIME CÓMO APRENDES Y…", "p": 22, "r": "حصة"}, {"n": 3, "t": "¿CÓMO APRENDES?", "p": 13, "r": "بيت"}, {"n": 9, "t": "MI BIOGRAFÍA LINGÜÍSTICA", "p": 20, "r": "بيت"}, {"n": 13, "t": "IRSE A VIVIR A OTRO PAÍS", "p": 23, "r": "بيت"}, {"n": "ME", "t": "Más ejercicios 9–10", "p": 153, "r": "بيت"}, {"n": 1, "t": "CUATRO LENGUAS EN CASA", "p": 11, "r": "إضافي"}, {"n": 5, "t": "ESTUDIO ESPAÑOL DESDE HACE DOS AÑOS", "p": 15, "r": "إضافي"}, {"n": 11, "t": "¿DESDE CUÁNDO HACES YOGA?", "p": 21, "r": "إضافي"}], "hint": "ترتيب «المسار الأساسي» الرسمي للوحدة 1 زي ما هو في رسم الدليل: 2 ← 4 ← 6 ← 7 ← 8 ← 10 ← 12 — دي الأنشطة الإلزامية بترتيبها؛ ولو ضاق الوقت امشِ عليه بالترتيب وسيب الباقي واجبًا. (النشاط 1 ص 11 تسخين سريع لو في وقت.)"}, "u2": {"n": [{"n": 1, "t": "FUERON LOS PRIMEROS", "p": 25, "r": "حصة"}, {"n": 2, "t": "CUATRO BIOPICS", "p": 26, "r": "إضافي"}, {"n": 3, "t": "ISABEL COIXET", "p": 27, "r": "حصة"}, {"n": 4, "t": "VIVÍ EN UN BARCO DURANTE UN AÑO", "p": 28, "r": "حصة"}, {"n": 5, "t": "DIRIGIÓ LA PELÍCULA LA TETA ASUSTADA", "p": 29, "r": "بيت"}, {"n": 6, "t": "UNA INFORMACIÓN FALSA", "p": 30, "r": "حصة"}, {"n": 7, "t": "UN CURRÍCULUM", "p": 31, "r": "إضافي"}, {"n": 8, "t": "UNA HISTORIA DE AMOR", "p": 34, "r": "بيت"}, {"n": 9, "t": "MITOS DE LA HISTORIA", "p": 35, "r": "إضافي"}, {"n": 10, "t": "LOS LUGARES DE MI VIDA", "p": 36, "r": "حصة"}, {"n": 11, "t": "LA BIOGRAFÍA DE SANDRO", "p": 36, "r": "حصة"}, {"n": 12, "t": "NAHUI OLIN: POETA, PINTORA, ESCRITORA Y MUSA", "p": 37, "r": "بيت"}], "t": [{"n": 1, "t": "FUERON LOS PRIMEROS", "p": 25, "r": "حصة"}, {"n": 3, "t": "ISABEL COIXET", "p": 27, "r": "حصة"}, {"n": 4, "t": "VIVÍ EN UN BARCO DURANTE UN AÑO", "p": 28, "r": "حصة"}, {"n": 6, "t": "UNA INFORMACIÓN FALSA", "p": 30, "r": "حصة"}, {"n": 10, "t": "LOS LUGARES DE MI VIDA", "p": 36, "r": "حصة"}, {"n": 11, "t": "LA BIOGRAFÍA DE SANDRO", "p": 36, "r": "حصة"}, {"n": 5, "t": "DIRIGIÓ LA PELÍCULA LA TETA ASUSTADA", "p": 29, "r": "بيت"}, {"n": 8, "t": "UNA HISTORIA DE AMOR", "p": 34, "r": "بيت"}, {"n": 12, "t": "NAHUI OLIN: POETA, PINTORA, ESCRITORA Y MUSA", "p": 37, "r": "بيت"}, {"n": 2, "t": "CUATRO BIOPICS", "p": 26, "r": "إضافي"}, {"n": 7, "t": "UN CURRÍCULUM", "p": 31, "r": "إضافي"}, {"n": 9, "t": "MITOS DE LA HISTORIA", "p": 35, "r": "إضافي"}], "hint": "المسار الأساسي للوحدة 2 بترتيب رسم الدليل: 1 ← 3 ← 4 ← 6 ← 10 ← 11 (والقفل بالنشاط 11: مقابلة + كتابة سيرة)."}, "u3": {"n": [{"n": 1, "t": "FAMILIAS DE FAMOSOS", "p": 39, "r": "بيت"}, {"n": 2, "t": "UNA WEB DE CONTACTOS", "p": 40, "r": "بيت"}, {"n": 3, "t": "LA BODA DEL HERMANO DE MARÍA DEL MAR", "p": 41, "r": "حصة"}, {"n": 4, "t": "¿A QUIÉN SE PARECE?", "p": 42, "r": "حصة"}, {"n": 5, "t": "¿CÓMO ERES?", "p": 43, "r": "حصة"}, {"n": 6, "t": "MIS AMIGOS…", "p": 44, "r": "إضافي"}, {"n": 7, "t": "ME LLEVO MUY BIEN CON…", "p": 44, "r": "حصة"}, {"n": 8, "t": "ESE CHICO DE AHÍ", "p": 45, "r": "إضافي"}, {"n": 9, "t": "¿QUIÉNES SON ESAS?", "p": 48, "r": "حصة"}, {"n": 10, "t": "JULIA SE PARECE A…", "p": 49, "r": "حصة"}, {"n": 11, "t": "BUSCAR PAREJA", "p": 50, "r": "حصة"}, {"n": 12, "t": "NIÑA DE PAPÁ", "p": 51, "r": "بيت"}], "t": [{"n": 3, "t": "LA BODA DEL HERMANO DE MARÍA DEL MAR", "p": 41, "r": "حصة"}, {"n": 4, "t": "¿A QUIÉN SE PARECE?", "p": 42, "r": "حصة"}, {"n": 5, "t": "¿CÓMO ERES?", "p": 43, "r": "حصة"}, {"n": 7, "t": "ME LLEVO MUY BIEN CON…", "p": 44, "r": "حصة"}, {"n": 9, "t": "¿QUIÉNES SON ESAS?", "p": 48, "r": "حصة"}, {"n": 10, "t": "JULIA SE PARECE A…", "p": 49, "r": "حصة"}, {"n": 11, "t": "BUSCAR PAREJA", "p": 50, "r": "حصة"}, {"n": 1, "t": "FAMILIAS DE FAMOSOS", "p": 38, "r": "بيت"}, {"n": 2, "t": "UNA WEB DE CONTACTOS", "p": 40, "r": "بيت"}, {"n": 12, "t": "NIÑA DE PAPÁ", "p": 51, "r": "بيت"}, {"n": 6, "t": "MIS AMIGOS…", "p": 44, "r": "إضافي"}, {"n": 8, "t": "ESE CHICO DE AHÍ", "p": 45, "r": "إضافي"}], "hint": "المسار الأساسي للوحدة 3 بترتيب رسم الدليل: 3 ← 4 ← 5 ← 7 ← 9 ← 10 ← 11 (والقفل بمهمة «إعلان الشريك المثالي»)."}, "u4": {"n": [{"n": 1, "t": "Actividad 1", "p": 53, "r": "إضافي"}, {"n": 2, "t": "PROMOCIONES INMOBILIARIAS", "p": 54, "r": "حصة"}, {"n": 3, "t": "INTERIORISMO", "p": 55, "r": "حصة"}, {"n": 4, "t": "LA LÁMPARA ESTÁ AL LADO DE LA TELEVISIÓN", "p": 56, "r": "حصة"}, {"n": 5, "t": "EL PISO DE JULIÁN", "p": 57, "r": "حصة"}, {"n": 6, "t": "VIVIR EN EL EXTRANJERO", "p": 58, "r": "حصة"}, {"n": 7, "t": "MI LUGAR FAVORITO", "p": 62, "r": "إضافي"}, {"n": 8, "t": "UN MUEBLE U OBJETO IMPORTANTE PARA MÍ", "p": 63, "r": "بيت"}, {"n": 9, "t": "UN SALÓN DE ESTILO…", "p": 63, "r": "إضافي"}, {"n": 10, "t": "UNA CASA ESPECIAL", "p": 64, "r": "حصة"}, {"n": 11, "t": "VIVIR EN 50 M2 EN MADRID", "p": 65, "r": "حصة"}], "t": [{"n": 2, "t": "PROMOCIONES INMOBILIARIAS", "p": 54, "r": "حصة"}, {"n": 3, "t": "INTERIORISMO", "p": 55, "r": "حصة"}, {"n": 4, "t": "LA LÁMPARA ESTÁ AL LADO DE LA TELEVISIÓN", "p": 56, "r": "حصة"}, {"n": 5, "t": "EL PISO DE JULIÁN", "p": 57, "r": "حصة"}, {"n": 6, "t": "VIVIR EN EL EXTRANJERO", "p": 58, "r": "حصة"}, {"n": 10, "t": "UNA CASA ESPECIAL", "p": 64, "r": "حصة"}, {"n": 11, "t": "VIVIR EN 50 M2 EN MADRID", "p": 65, "r": "حصة"}, {"n": 8, "t": "UN MUEBLE U OBJETO IMPORTANTE PARA MÍ", "p": 63, "r": "بيت"}, {"n": 1, "t": "Actividad 1", "p": 53, "r": "إضافي"}, {"n": 7, "t": "MI LUGAR FAVORITO", "p": 62, "r": "إضافي"}, {"n": 9, "t": "UN SALÓN DE ESTILO…", "p": 63, "r": "إضافي"}], "hint": "المسار الأساسي للوحدة 4 بترتيب رسم الدليل: 2 ← 3 ← 4 ← 5 ← 6 ← 10 ← 11 — والنشاط 10 (تصميم مسكن) يُنفَّذ داخل الحصة، وفيديو النشاط 11 يُعرض في آخر 10 دقائق."}};
+const TRPAGE = {"1": 2317, "2": 2317, "3": 2318, "4": 2318, "5": 2318, "6": 2320, "7": 2320, "8": 2322, "9": 2323, "10": 2325, "11": 2325, "12": 2326, "13": 2326, "14": 2326, "15": 2327, "56": 2348, "57": 3348, "58": 4348, "59": 2349};
+const PINFO = {"11": [{"t": "CUATRO LENGUAS EN CASA", "r": "إضافي"}], "12": [{"t": "ENTREVISTA EN LA ESCUELA", "r": "حصة"}], "13": [{"t": "¿CÓMO APRENDES?", "r": "بيت"}], "14": [{"t": "LOS NUEVOS ESPAÑOLES", "r": "حصة"}], "15": [{"t": "ESTUDIO ESPAÑOL DESDE HACE DOS AÑOS", "r": "إضافي"}], "16": [{"t": "ME SIENTO RIDÍCULO CUANDO HABLO ESPAÑOL", "r": "حصة"}], "17": [{"t": "ME CUESTA", "r": "حصة"}, {"t": "VA BIEN HABLAR MUCHO", "r": "حصة"}], "20": [{"t": "MI BIOGRAFÍA LINGÜÍSTICA", "r": "بيت"}], "21": [{"t": "ME SIENTO SEGURA CUANDO TRABAJO EN GRUPO", "r": "حصة"}, {"t": "¿DESDE CUÁNDO HACES YOGA?", "r": "إضافي"}], "22": [{"t": "DIME CÓMO APRENDES Y…", "r": "حصة"}], "23": [{"t": "IRSE A VIVIR A OTRO PAÍS", "r": "بيت"}], "1284": [{"t": "Más gramática — El español y tú", "r": "إضافي"}], "1285": [{"t": "Más gramática — El español y tú", "r": "إضافي"}], "1286": [{"t": "Más gramática — El español y tú", "r": "إضافي"}], "1287": [{"t": "Más gramática — El español y tú", "r": "إضافي"}], "2316": [{"t": "Transcripciones — El español y tú", "r": "إضافي"}], "2317": [{"t": "Transcripciones — El español y tú", "r": "إضافي"}], "2318": [{"t": "Transcripciones — El español y tú", "r": "إضافي"}], "2348": [{"t": "Transcripciones — Más ejercicios (الوحدة 1)", "r": "إضافي"}], "25": [{"t": "FUERON LOS PRIMEROS", "r": "حصة"}], "26": [{"t": "CUATRO BIOPICS", "r": "إضافي"}], "27": [{"t": "ISABEL COIXET", "r": "حصة"}], "28": [{"t": "VIVÍ EN UN BARCO DURANTE UN AÑO", "r": "حصة"}], "29": [{"t": "DIRIGIÓ LA PELÍCULA LA TETA ASUSTADA", "r": "بيت"}], "30": [{"t": "UNA INFORMACIÓN FALSA", "r": "حصة"}], "31": [{"t": "UN CURRÍCULUM", "r": "إضافي"}], "34": [{"t": "UNA HISTORIA DE AMOR", "r": "بيت"}], "35": [{"t": "MITOS DE LA HISTORIA", "r": "إضافي"}], "36": [{"t": "LOS LUGARES DE MI VIDA", "r": "حصة"}, {"t": "LA BIOGRAFÍA DE SANDRO", "r": "حصة"}], "37": [{"t": "NAHUI OLIN: POETA, PINTORA, ESCRITORA Y MUSA", "r": "بيت"}], "1288": [{"t": "Más gramática — Una vida de película", "r": "إضافي"}], "1289": [{"t": "Más gramática — Una vida de película", "r": "إضافي"}], "1290": [{"t": "Más gramática — Una vida de película", "r": "إضافي"}], "1291": [{"t": "Más gramática — Una vida de película", "r": "إضافي"}], "1292": [{"t": "Más gramática — Una vida de película", "r": "إضافي"}], "2320": [{"t": "Transcripciones — Una vida de película", "r": "إضافي"}], "2321": [{"t": "Transcripciones — Una vida de película", "r": "إضافي"}], "3348": [{"t": "Transcripciones — Más ejercicios (الوحدة 2)", "r": "إضافي"}], "39": [{"t": "FAMILIAS DE FAMOSOS", "r": "بيت"}], "40": [{"t": "UNA WEB DE CONTACTOS", "r": "بيت"}], "41": [{"t": "LA BODA DEL HERMANO DE MARÍA DEL MAR", "r": "حصة"}], "42": [{"t": "¿A QUIÉN SE PARECE?", "r": "حصة"}], "43": [{"t": "¿CÓMO ERES?", "r": "حصة"}], "44": [{"t": "MIS AMIGOS…", "r": "إضافي"}, {"t": "ME LLEVO MUY BIEN CON…", "r": "حصة"}], "45": [{"t": "ESE CHICO DE AHÍ", "r": "إضافي"}], "48": [{"t": "¿QUIÉNES SON ESAS?", "r": "حصة"}], "49": [{"t": "JULIA SE PARECE A…", "r": "حصة"}], "50": [{"t": "BUSCAR PAREJA", "r": "حصة"}], "51": [{"t": "NIÑA DE PAPÁ", "r": "بيت"}], "1293": [{"t": "Más gramática — Yo soy así", "r": "إضافي"}], "1294": [{"t": "Más gramática — Yo soy así", "r": "إضافي"}], "1295": [{"t": "Más gramática — Yo soy así", "r": "إضافي"}], "1296": [{"t": "Más gramática — Yo soy así", "r": "إضافي"}], "1297": [{"t": "Más gramática — Yo soy así", "r": "إضافي"}], "2322": [{"t": "Transcripciones — Yo soy así", "r": "إضافي"}], "2323": [{"t": "Transcripciones — Yo soy así", "r": "إضافي"}], "2324": [{"t": "Transcripciones — Yo soy así", "r": "إضافي"}], "4348": [{"t": "Transcripciones — Más ejercicios (الوحدة 3)", "r": "إضافي"}], "53": [{"t": "Actividad 1", "r": "إضافي"}], "54": [{"t": "PROMOCIONES INMOBILIARIAS", "r": "حصة"}], "55": [{"t": "INTERIORISMO", "r": "حصة"}], "56": [{"t": "LA LÁMPARA ESTÁ AL LADO DE LA TELEVISIÓN", "r": "حصة"}], "57": [{"t": "EL PISO DE JULIÁN", "r": "حصة"}], "58": [{"t": "VIVIR EN EL EXTRANJERO", "r": "حصة"}], "62": [{"t": "MI LUGAR FAVORITO", "r": "إضافي"}], "63": [{"t": "UN MUEBLE U OBJETO IMPORTANTE PARA MÍ", "r": "بيت"}, {"t": "UN SALÓN DE ESTILO…", "r": "إضافي"}], "64": [{"t": "UNA CASA ESPECIAL", "r": "حصة"}], "65": [{"t": "VIVIR EN 50 M2 EN MADRID", "r": "حصة"}], "1298": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "1299": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "1300": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "1301": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "1302": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "1303": [{"t": "Más gramática — Hogar, dulce hogar", "r": "إضافي"}], "2325": [{"t": "Transcripciones — Hogar, dulce hogar", "r": "إضافي"}], "2326": [{"t": "Transcripciones — Hogar, dulce hogar", "r": "إضافي"}], "2327": [{"t": "Transcripciones — Hogar, dulce hogar", "r": "إضافي"}], "2349": [{"t": "Transcripciones — Más ejercicios (الوحدة 4)", "r": "إضافي"}]};
+const PAGES = [];
+UNITS.forEach(u => { for (let i=u.lo;i<=u.hi;i++) PAGES.push(i); for (let i=u.me[0];i<=u.me[1];i++) PAGES.push(i); (u.mg||[]).forEach(x=>PAGES.push(x)); (u.tr2||[]).forEach(x=>PAGES.push(x)); if (u.met2 != null) PAGES.push(u.met2); });
+PAGES.sort((x,y)=>x-y);
+const TABS = UNITS.map(u=>({k:u.k, ar:u.ar, es:u.es, from:u.lo}));
+let CURV = 'u1';
+let idxMode = 'n';
+function unitOrder(u, mode){
+  const out = []; const push = p => { if (PAGES.indexOf(p) >= 0 && out.indexOf(p) < 0) out.push(p); };
+  if (mode === 't'){
+    const d = IDX[u.k];
+    if (d && d.t) d.t.forEach(r=>{ if (r.n !== 'ME' && r.p >= u.lo && r.p <= u.hi) push(r.p); });
+  }
+  for (let i = u.lo; i <= u.hi; i++) push(i);
+  for (let i = u.me[0]; i <= u.me[1]; i++) push(i);
+  (u.tr2 || []).forEach(push);
+  if (u.met2 != null) push(u.met2);
+  (u.mg || []).forEach(push);
+  return out;
+}
+function viewOrder(){ const u = UNITS.find(x => x.k === CURV); return u ? unitOrder(u, idxMode) : []; }
+function pageOrder(mode){ const out = []; UNITS.forEach(u => unitOrder(u, mode).forEach(p => out.push(p))); return out; }
+function showView(k, scrollTo){
+  if (['u1','u2','u3','u4'].indexOf(String(k)) < 0) k = 'u1';
+  CURV = String(k);
+  lastU = CURV;
+  ORDER = viewOrder();
+  if ($('idxp') && $('idxp').classList.contains('open')) renderIdx();
+  if ($('tray') && $('tray').classList.contains('open')) buildTray();
+  document.querySelectorAll('section.pg').forEach(s => {
+    const on = tabOf(+s.dataset.p) === CURV;
+    s.classList.toggle('on', on);
+    if (on) s.querySelectorAll('img').forEach(im => {
+      if (!im.complete){ im.loading = 'eager'; const src = im.getAttribute('src'); im.removeAttribute('src'); im.setAttribute('src', src); }
+    });
+  });
+  syncTabs();
+  try{ localStorage.setItem('lector_iview', CURV); }catch(e){}
+  if (scrollTo != null && PAGES.indexOf(scrollTo) >= 0){
+    cur = scrollTo; syncTabs(); syncPos();
+    pinTo(scrollTo, 3000);
+    if (location.hash !== '#p' + scrollTo) history.replaceState(null, '', '#p' + scrollTo);
+  } else {
+    const f = ORDER[0];
+    if (f != null) cur = f;
+    syncTabs(); syncPos();
+    window.scrollTo(0, 0);
+    if (f != null){
+      const fsec = document.getElementById('p' + f);
+      if (fsec) fsec.querySelectorAll('img').forEach(im => { if (!im.complete) im.addEventListener('load', () => window.scrollTo(0, 0), {once: true}); });
+    }
+  }
+}
+
+let cur = PAGES[0];
+const $ = id => document.getElementById(id);
+
+function buildTabs(){
+  const t = $('tabs'); t.innerHTML='';
+  TABS.forEach(tb=>{
+    const b = document.createElement('button');
+    b.className='tab'; b.dataset.k=tb.k;
+    b.innerHTML = tb.ar + ' <span class="es">· ' + tb.es + '</span>';
+    b.onclick = ()=> go(tb.from);
+    t.appendChild(b);
+  });
+}
+function tabOf(p){
+  const u = UNITS.find(u => (p >= u.lo && p <= u.hi) || (p >= u.me[0] && p <= u.me[1])
+    || (u.mg || []).indexOf(p) >= 0 || (u.tr2 || []).indexOf(p) >= 0 || u.met2 === p);
+  return u ? u.k : '';
+}
+function syncTabs(){
+  const k = tabOf(cur);
+  document.querySelectorAll('.tab').forEach(b=> b.classList.toggle('on', b.dataset.k===k));
+}
+
+/* ------- طبقة الأزرار ------- */
+function renderPage(p){
+  const sec = document.getElementById('p' + p);
+  if (!sec) return;
+  const layer = sec.querySelector('.layer'); if (!layer) return;
+  layer.innerHTML='';
+  (PST[String(p)] || OV[String(p)] || []).forEach((b, i)=>{
+    const el = document.createElement('button');
+    if (b.k === 'w'){
+      el.className = 'ow';
+      el.textContent = '?';
+      el.style.top = b.y + '%'; el.style.left = b.x + '%'; el.style.width = b.w + '%';
+      el.title = 'اضغط لكتابة الإجابة (presente / indefinido)';
+      el.onclick = (e)=>{ e.stopPropagation(); if (editOn) return;
+        el.textContent = (el.textContent === '?') ? b.tx : '?'; };
+      makeDrag(el, p + '|' + i, b.x, b.y);
+      layer.appendChild(el);
+      return;
+    }
+    if (b.k === 'v'){
+      el.className = 'od vid';
+      el.textContent = '▶ فيديو';
+      el.style.top = b.y + '%'; el.style.left = b.x + '%'; el.style.width = b.w + '%';
+      el.title = 'يفتح فيديو الوحدة على يوتيوب';
+      el.onclick = (e)=>{ e.stopPropagation(); if (editOn) return; window.open(b.url, '_blank'); };
+      makeDrag(el, p + '|' + i, b.x, b.y);
+      layer.appendChild(el);
+      return;
+    }
+    if (b.k === 'tr'){
+      el.className = 'od trb';
+      el.textContent = 'تفريغ';
+      el.style.top = b.y + '%'; el.style.left = b.x + '%'; el.style.width = b.w + '%';
+      el.title = 'تفريغ الصوت ' + (b.track || '') + ' — يوديك لصفحة التفريغ';
+      el.onclick = (e)=>{ e.stopPropagation(); if (editOn) return; const tp = TRPAGE[b.track]; if (tp) go(tp); };
+      makeDrag(el, p + '|' + i, b.x, b.y);
+      layer.appendChild(el);
+      return;
+    }
+    if (b.k === 'd'){
+      el.className = 'od' + (b.lb === 'بديلة' ? ' alt' : '');
+      el.textContent = b.lb;
+      const X = b.x, Y = b.y;
+      el.style.top = Y + '%'; el.style.left = X + '%'; el.style.width = b.w + '%';
+      el.title = 'تشغيل الصوت ' + b.lb;
+      el.onclick = (e)=>{ e.stopPropagation(); if (editOn) return;
+        if (b.soft){
+          el.textContent = '…';
+          const probe = new Audio('audio/' + b.fl[0]);
+          let done = false;
+          const fallback = ()=>{ if (done) return; done = true; el.textContent = b.lb;
+            const tp = TRPAGE[b.track]; if (tp) go(tp); };
+          probe.addEventListener('loadedmetadata', ()=>{ if (done) return; done = true; playQueue(b.fl, b.lb); }, {once:true});
+          probe.addEventListener('error', fallback, {once:true});
+          setTimeout(fallback, 2500);
+          return;
+        }
+        playQueue(b.fl, b.lb); };
+      el.title = b.soft ? ('اسمع الصوت ' + b.lb + ' — لو الصوت مش محمّل يفتحلك التفريغ') : ('تشغيل الصوت ' + b.lb);
+      makeDrag(el, p + '|' + i, X, Y);
+      layer.appendChild(el);
+      return;
+    }
+    el.className = 'oa';
+    el.textContent = '';
+    const X = b.x, Y = b.y;
+    el.style.top = Y + '%'; el.style.left = X + '%';
+    el.title = 'اضغط لعرض الإجابة';
+    const card = document.createElement('div');
+    card.className = 'acard';
+    const ttl = b.lb ? ('إجابة ' + b.lb) : 'الإجابة';
+    card.innerHTML = '<div class="ttl">' + ttl + '</div><div class="ans" dir="ltr"></div>';
+    card.querySelector('.ans').textContent = b.tx;
+    // البطاقة ملتصقة بزرها: من الشمال لو الزر في يمين الصفحة، ومن اليمين العكس
+    anchorCard(card, X, Y);
+    el._card = card;
+    makeDrag(el, p + '|' + i, X, Y);
+    el.onclick = (e)=>{
+      e.stopPropagation();
+      if (el._dragmoved){ el._dragmoved = false; return; }
+      if (editOn) return;
+      const was = card.classList.contains('open');
+      closeCards();
+      if (!was){ card.classList.add('open'); el.classList.add('on'); }
+    };
+    el.ondblclick = (e)=>{
+      if (!editOn || el._dragmoved) return;
+      e.stopPropagation();
+      const L = pageList(p); if (!L[i]) return;
+      const nt = prompt('نص الإجابة:', L[i].tx || '');
+      if (nt != null && nt.trim()){ L[i].tx = nt.trim(); savePST(); renderPage(p); }
+    };
+    el.oncontextmenu = (e)=>{
+      if (!editOn) return;
+      e.preventDefault(); e.stopPropagation();
+      const L = pageList(p);
+      if (L[i]){ L.splice(i, 1); savePST(); renderPage(p); }
+    };
+    layer.appendChild(el); layer.appendChild(card);
+  });
+}
+function renderAll(){ PAGES.forEach(p => renderPage(p)); }
+function closeCards(){
+  document.querySelectorAll('.acard.open').forEach(c=>c.classList.remove('open'));
+  document.querySelectorAll('.oa.on').forEach(c=>c.classList.remove('on'));
+}
+$('ansAll').onclick = ()=>{
+  const anyHidden = [...document.querySelectorAll('.acard')].some(c=>!c.classList.contains('open'));
+  if (anyHidden){ document.querySelectorAll('.acard').forEach(c=>c.classList.add('open')); document.querySelectorAll('.oa').forEach(c=>c.classList.add('on')); }
+  else closeCards();
+};
+
+/* ------- التنقل ------- */
+let ORDER = PAGES.slice();
+let pinSeq = 0;
+function pinTo(pid, dur){
+  const sec = document.getElementById('p' + pid);
+  if (!sec) return;
+  const my = ++pinSeq;
+  const until = Date.now() + (dur || 3000);
+  const settle = ()=>{
+    if (my !== pinSeq || Date.now() >= until) return;
+    sec.scrollIntoView({block: 'start'});
+    requestAnimationFrame(()=>{
+      if (my !== pinSeq) return;
+      const r = sec.getBoundingClientRect();
+      if (r.top <= window.innerHeight * 0.55 && r.bottom >= window.innerHeight * 0.45){
+        cur = pid; syncTabs(); syncPos();
+        if (location.hash !== '#p' + pid) history.replaceState(null, '', '#p' + pid);
+      } else setTimeout(settle, 200);
+    });
+  };
+  settle();
+  sec.querySelectorAll('img').forEach(im=>{ if (!im.complete) im.addEventListener('load', settle, {once: true}); });
+  document.querySelectorAll('section.pg.on img').forEach(im=>{ if (!im.complete) im.addEventListener('load', settle, {once: true}); });
+}
+function go(p){
+  if (PAGES.indexOf(p) < 0) return;
+  if (tabOf(p) !== CURV){ showView(tabOf(p), p); return; }
+  cur = p;
+  closeCards();
+  syncTabs(); syncPos();
+  pinTo(p, 1600);
+  if (location.hash !== '#p' + p) history.replaceState(null, '', '#p' + p);
+}
+function syncPos(){
+  const i = Math.max(0, ORDER.indexOf(cur));
+  $('prevB').disabled = (i <= 0);
+  $('nextB').disabled = (i >= ORDER.length - 1);
+  let lbl = '—';
+  const ub = UNITS.find(u => cur >= u.lo && cur <= u.hi);
+  const um = UNITS.find(u => cur >= u.me[0] && cur <= u.me[1]);
+  const utr = UNITS.find(u => (u.tr2 || []).indexOf(cur) >= 0);
+  const umt = UNITS.find(u => u.met2 === cur);
+  const ug = UNITS.find(u => (u.mg || []).indexOf(cur) >= 0);
+  if (ub) lbl = ub.ar + ' · ' + ub.es;
+  else if (um) lbl = um.ar + ' — تمارين إضافية';
+  else if (utr) lbl = utr.ar + ' — تفريغ الكتاب';
+  else if (umt) lbl = umt.ar + ' — تفريغ ME';
+  else if (ug) lbl = ug.ar + ' — قواعد الوحدة';
+  if (localStorage.getItem('lector_imode') === 't') lbl += ' · مود الكورس';
+  $('posLbl').innerHTML = '<span dir="ltr" style="unicode-bidi:isolate">' + (i+1) + ' / ' + ORDER.length + '</span><small>' + lbl + '</small>';
+  const rows = PINFO[String(cur)] || [];
+  const _pt = ((PINFO[String(cur)] || [{}])[0].t || '');
+  const pgLbl = cur >= 1000 ? (_pt.indexOf('gramática') >= 0 ? 'Más gramática' : 'التفريغ') : ('ص ' + cur);
+  let ih = '<span class="pgno">' + pgLbl + '</span>';
+  if (rows.length){
+    const r0 = rows[0];
+    const rr = (r0.r || '');
+    const rk = rr.indexOf('حصة') >= 0 ? 'h' : rr.indexOf('بيت') >= 0 ? 'b' : 'e';
+    const rlbl = rr.indexOf('حصة') >= 0 ? 'حصة' : rr.indexOf('بيت') >= 0 ? 'بيت' : rr;
+    let tt = (r0.t || '').replace(/\\s+/g, ' ').trim();
+    if (tt.length > 26) tt = tt.slice(0, 25) + '…';
+    ih = (tt ? '<b class="esb" dir="ltr">' + tt + '</b> ' : '') + '<span class="pgno">' + pgLbl + '</span>'
+       + (rlbl ? ' <span class="role ' + rk + '">' + rlbl + '</span>' : '')
+       + (rows.length > 1 ? ' <span class="more">+' + (rows.length - 1) + '</span>' : '');
+  }
+  if ($('mbInfo')) $('mbInfo').innerHTML = ih;
+}
+$('nextB').onclick = ()=>{ const i=ORDER.indexOf(cur); if (i>=0 && i<ORDER.length-1) go(ORDER[i+1]); };
+$('prevB').onclick = ()=>{ const i=ORDER.indexOf(cur); if (i>0) go(ORDER[i-1]); };
+document.addEventListener('keydown', e=>{
+  if ($('idxp') && $('idxp').classList.contains('open')) return;
+  if (e.key==='ArrowLeft') $('prevB').click();
+  if (e.key==='ArrowRight') $('nextB').click();
+  if (e.key==='Escape') closeCards();
+});
+
+/* ------- الصوت ------- */
+const au = $('au');
+let queue = [], qi = 0, curKey = null;
+function playQueue(files, label){
+  queue = files.slice(); qi = 0; curKey = label + '|' + files[0];
+  $('au').src = 'audio/' + files[0];
+  $('au').play();
+  $('audNow').textContent = label + (files.length>1 ? ' · ' + (qi+1)+'/'+files.length : '');
+  $('audBar').classList.add('open');
+  buildTray();
+}
+function unitOf(p){ return UNITS.find(u => p>=u.lo && p<=u.me[1]) || UNITS[0]; }
+let lastU = 'u1';
+function ctxU(){ return UNITS.find(u => u.k === CURV) || UNITS.find(u => u.k === lastU) || UNITS[0]; }
+function buildTray(){
+  const u = ctxU();
+  const t = $('trayin'); t.innerHTML = '<span class="lb">' + u.ar + ' — صوتيات:</span>';
+  const add = (file, label, isAlt)=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (isAlt?' alt':'');
+    b.textContent = label;
+    b.onclick = ()=> playQueue([file], label);
+    if (au.src && au.src.endsWith(file)) b.classList.add('play');
+    t.appendChild(b);
+  };
+  u.tracks.forEach(tr=>{
+    add('auint_plus_2_' + tr + '.mp3', tr.replace(/^0/,''));
+    if (u.alts && u.alts[tr]) add('auint_plus_2_' + u.alts[tr] + '.mp3', tr.replace(/^0/,'') + ' بديلة', true);
+  });
+  if (u.met) add('auint_plus_2_' + u.met + '.mp3', String(parseInt(u.met, 10)) + ' · متابعة');
+}
+$('audBtn').onclick = ()=>{
+  const tray = $('tray'); tray.classList.toggle('open');
+  $('audBtn').classList.toggle('on', tray.classList.contains('open'));
+  if (tray.classList.contains('open')) buildTray();
+};
+function fmt(s){ s=Math.max(0,s|0); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+$('audPlay').onclick = ()=>{ if (au.paused) au.play(); else au.pause(); };
+let auRate = 1;
+$('audRate').onclick = ()=>{
+  auRate = (auRate === 1) ? 0.7 : 1;
+  au.playbackRate = auRate;
+  $('audRate').textContent = '×' + (auRate === 1 ? '1' : '0.70');
+  $('audRate').style.background = (auRate === 1) ? '#fff' : 'var(--gold)';
+  $('audRate').style.color = (auRate === 1) ? '' : '#fff';
+  $('audRate').style.borderColor = (auRate === 1) ? 'var(--line)' : 'var(--gold)';
+};
+au.onloadedmetadata = ()=>{ au.playbackRate = auRate; };
+au.onplay = ()=>{ $('icPlay').style.display='none'; $('icPause').style.display=''; };
+au.onpause = ()=>{ $('icPlay').style.display=''; $('icPause').style.display='none'; };
+au.ontimeupdate = ()=>{
+  if (au.duration) $('audSeek').value = 100*au.currentTime/au.duration;
+  $('audTm').textContent = fmt(au.currentTime)+' / '+fmt(au.duration||0);
+};
+$('audSeek').oninput = ()=>{ if (au.duration) au.currentTime = au.duration * $('audSeek').value/100; };
+au.onended = ()=>{
+  if (qi + 1 < queue.length){
+    qi++;
+    $('au').src = 'audio/' + queue[qi];
+    $('au').play();
+    $('audNow').textContent = $('audNow').textContent.replace(/·\s*\d+\/\d+/, '· ' + (qi+1)+'/'+queue.length);
+    return;
+  }
+  $('icPlay').style.display=''; $('icPause').style.display='none';
+};
+
+/* ------- إخفاء/إظهار الأزرار ------- */
+function setHide(v){
+  document.body.classList.toggle('hideov', v);
+  $('hideBtn').classList.toggle('on', v);
+  $('hideLbl').textContent = v ? 'إظهار الأزرار' : 'إخفاء الأزرار';
+  $('hideBtn').setAttribute('aria-pressed', v ? 'true' : 'false');
+  localStorage.setItem('lector_hide', v ? '1' : '0');
+  if (v) closeCards();
+}
+$('hideBtn').onclick = ()=> setHide(!document.body.classList.contains('hideov'));
+if (localStorage.getItem('lector_hide') === '1') setHide(true);
+
+/* ------- فهرس الوحدة (ترتيب الكتاب / مود المدرس) ------- */
+idxMode = localStorage.getItem('lector_imode') === 't' ? 't' : 'n';
+function idxRoleCls(r){ return r === 'حصة' ? 'c-h' : (r === 'بيت' ? 'c-b' : 'c-e'); }
+function renderIdx(){
+  const u = ctxU(); const d = IDX[u.k];
+  if (!d) return;
+  $('idxTitle').textContent = u.ar + ' — ' + u.es;
+  $('modeN').classList.toggle('on', idxMode === 'n');
+  $('modeT').classList.toggle('on', idxMode === 't');
+  if (idxMode === 't'){
+    $('idxSub').textContent = '';
+  } else {
+    $('idxSub').textContent = 'بالترتيب كما في الكتاب: ' + d.n.map(r => r.n).join(' ← ');
+  }
+  const L = $('idxList'); L.innerHTML = '';
+  const rows = (idxMode === 't' ? d.t : d.n).slice();
+  rows.push({n:'ME', t:'Más ejercicios — تمارين إضافية', p:u.me[0], r:'إضافي', _lbl:'ص ' + u.me[0]});
+  if ((u.tr2 || []).length) rows.push({n:'TR', t:'Transcripciones — تفريغ الكتاب', p:u.tr2[0], r:'إضافي', _lbl:'تفريغ'});
+  if (u.met2 != null) rows.push({n:'TR ME', t:'Transcripciones — تفريغ Más ejercicios', p:u.met2, r:'إضافي', _lbl:'تفريغ ME'});
+  if ((u.mg || []).length) rows.push({n:'GRAM', t:'Más gramática — قواعد الوحدة', p:u.mg[0], r:'إضافي', _lbl:'قواعد'});
+  rows.forEach(r => {
+    const row = document.createElement('button');
+    row.className = 'ixr';
+    const bn = document.createElement('span'); bn.className = 'ixn';
+    if (r.n === 'ME'){ bn.textContent = 'ME'; bn.style.fontSize = '11px'; bn.style.fontWeight = '700'; }
+    else bn.textContent = r.n;
+    const tx = document.createElement('span'); tx.className = 'ixt';
+    const es = document.createElement('span'); es.className = 'es'; es.textContent = r.t;
+    const sm = document.createElement('small'); sm.textContent = r._lbl || ('ص ' + r.p);
+    tx.appendChild(es); tx.appendChild(sm);
+    const ch = document.createElement('span');
+    ch.className = 'ixc ' + idxRoleCls(r.r);
+    ch.textContent = r.r === 'حصة' ? 'في الحصة' : (r.r === 'بيت' ? 'في البيت' : 'إضافي');
+    row.appendChild(bn); row.appendChild(tx); row.appendChild(ch);
+    row.onclick = ()=>{ $('idxp').classList.remove('open'); go(r.p); };
+    L.appendChild(row);
+  });
+}
+$('idxBtn').onclick = ()=>{ renderIdx(); $('idxp').classList.add('open'); };
+$('idxX').onclick = ()=> $('idxp').classList.remove('open');
+$('idxp').onclick = (e)=>{ if (e.target === $('idxp')) $('idxp').classList.remove('open'); };
+$('modeN').onclick = ()=>{ idxMode = 'n'; localStorage.setItem('lector_imode', 'n'); renderIdx(); applyOrder('n'); };
+$('modeT').onclick = ()=>{ idxMode = 't'; localStorage.setItem('lector_imode', 't'); renderIdx(); applyOrder('t'); };
+function applyOrder(mode, silent){
+  const doc = $('doc');
+  pageOrder(mode).forEach(p=>{ const s = document.getElementById('p' + p); if (s) doc.appendChild(s); });
+  ORDER = viewOrder();
+  if (!silent) showView(CURV, cur);
+}
+document.addEventListener('keydown', e=>{
+  if (e.key === 'Escape' && $('idxp').classList.contains('open')) $('idxp').classList.remove('open');
+});
+
+/* ------- التنقل بين الصفحات: الترتيب داخل كل تبويب ثابت (كتاب ← ME ← تفريغ ← تفريغ ME ← قواعد) ------- */
+/* مراقب: أي صفحة في منتصف الشاشة = الصفحة الحالية */
+const secObs = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if (e.isIntersecting){
+      const p = parseInt(e.target.getAttribute('data-p'));
+      if (p && p !== cur){
+        cur = p; syncTabs(); syncPos();
+        if (location.hash !== '#p' + p) history.replaceState(null, '', '#p' + p);
+      }
+    }
+  });
+}, {rootMargin: '-45% 0px -45% 0px', threshold: 0});
+
+/* ------- وضع تعديل مواقع الأزرار ------- */
+let editOn = false;
+let PST = {};
+try { PST = JSON.parse(localStorage.getItem('lector_pills') || '{}') || {}; } catch(_){ PST = {}; }
+function savePST(){ try { localStorage.setItem('lector_pills', JSON.stringify(PST)); } catch(_){} }
+function pageList(p){ const k = String(p); if (!PST[k]) PST[k] = (OV[k] || []).map(o => Object.assign({}, o)); return PST[k]; }
+let addArm = false;
+function anchorCard(card, X, Y){
+  if (X > 48){
+    card.style.right = Math.max(1, 98 - X) + '%';
+    card.style.left = 'auto';
+  } else {
+    card.style.left = X + '%';
+    card.style.right = 'auto';
+  }
+  card.style.top = 'calc(' + Y + '% + 15px)';
+}
+function makeDrag(el, key, X0, Y0){
+  el.addEventListener('pointerdown', e=>{
+    if (!editOn) return;
+    e.preventDefault(); e.stopPropagation();
+    const wrap = el.closest('.pwrap').getBoundingClientRect();
+    // القاعدة = الموقع الحالي الفعلي وقت الضغطة (مش موقع الإنشاء) — ده اللي كان بيسبب قفز المستطيل في السحب التاني
+    const bx = parseFloat(el.style.left);
+    const by = parseFloat(el.style.top);
+    const X = isNaN(bx) ? X0 : bx;
+    const Y = isNaN(by) ? Y0 : by;
+    const sx = e.clientX, sy = e.clientY;
+    const wPct = Math.max(2, 100 * el.getBoundingClientRect().width / wrap.width);
+    const hPct = Math.max(2, 100 * el.getBoundingClientRect().height / wrap.height);
+    const pid = e.pointerId;
+    let moved = false, raf = 0, last = null;
+    try { if (el.setPointerCapture) el.setPointerCapture(pid); } catch(_){}
+    el.classList.add('dragging');
+    const apply = ev=>{
+      const dx = 100 * (ev.clientX - sx) / wrap.width;
+      const dy = 100 * (ev.clientY - sy) / wrap.height;
+      const nx = Math.min(100 - wPct - 0.3, Math.max(0.3, X + dx));
+      const ny = Math.min(100 - hPct - 0.3, Math.max(0.3, Y + dy));
+      const pp = parseInt(key), ii = parseInt(key.split('|')[1]);
+      const it = pageList(pp)[ii];
+      if (it){ it.x = Math.round(nx * 100) / 100; it.y = Math.round(ny * 100) / 100; }
+      el.style.left = it ? it.x + '%' : nx + '%';
+      el.style.top = it ? it.y + '%' : ny + '%';
+      const card = el._card;
+      if (card && card.classList.contains('open')) anchorCard(card, it ? it.x : nx, it ? it.y : ny);
+    };
+    const move = ev=>{
+      if (ev.pointerId !== pid) return;
+      if (ev.pointerType === 'mouse' && !ev.buttons){ end(); return; }
+      if (!moved && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) < 5) return;
+      moved = true;
+      last = ev;
+      if (!raf) raf = requestAnimationFrame(()=>{ raf = 0; if (last) apply(last); });
+    };
+    const end = ()=>{
+      document.removeEventListener('pointermove', move);
+      document.removeEventListener('pointerup', end);
+      document.removeEventListener('pointercancel', end);
+      window.removeEventListener('blur', end);
+      if (raf){ cancelAnimationFrame(raf); raf = 0; if (last) apply(last); }
+      el.classList.remove('dragging');
+      if (moved){ savePST(); el._dragmoved = true; clearTimeout(el._ct); el._ct = setTimeout(()=>{ el._dragmoved = false; }, 150); }
+    };
+    document.addEventListener('pointermove', move, {passive: false});
+    document.addEventListener('pointerup', end);
+    document.addEventListener('pointercancel', end);
+    window.addEventListener('blur', end);
+  });
+}
+$('editBtn').onclick = ()=>{
+  editOn = !editOn;
+  $('editBtn').classList.toggle('on', editOn);
+  $('editTray').classList.toggle('open', editOn);
+  document.body.classList.toggle('editmode', editOn);
+  closeCards();
+};
+$('fixAdd').onclick = ()=>{
+  addArm = !addArm;
+  $('fixAdd').classList.toggle('on', addArm);
+  if (addArm) alert('دوس الآن على الصفحة في مكان الإجابة — وهيتحط فيها زر جديد.');
+};
+$('doc').addEventListener('click', (e)=>{
+  if (!editOn || !addArm) return;
+  if (e.target.closest('.oa, .od, .acard')) return;
+  const wrap = e.target.closest('.pwrap');
+  if (!wrap) return;
+  e.stopPropagation();
+  const lay = wrap.querySelector('.layer');
+  if (!lay) return;
+  const rct = wrap.getBoundingClientRect();
+  const nx = Math.min(97, Math.max(0.4, 100 * (e.clientX - rct.left) / rct.width));
+  const ny = Math.min(99, Math.max(1, 100 * (e.clientY - rct.top) / rct.height));
+  const t = prompt('نص الإجابة الجديدة:');
+  if (t != null && t.trim()){
+    const pp = +lay.dataset.p;
+    const L = pageList(pp);
+    L.push({k: 'a', x: Math.round(nx * 100) / 100, y: Math.round(ny * 100) / 100, w: 4.2, lb: '', tx: t.trim()});
+    savePST(); renderPage(pp);
+  }
+  addArm = false; $('fixAdd').classList.remove('on');
+});
+$('fixClear').onclick = ()=>{ PST = {}; savePST(); renderAll(); };
+$('fixExport').onclick = ()=>{
+  const blob = new Blob([JSON.stringify({v: 2, pages: PST}, null, 1)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'pill_fixes.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+};
+$('fixImport').onclick = ()=> $('fixFile').click();
+$('fixFile').onchange = (e)=>{
+  const f = e.target.files && e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{
+    try {
+      const obj = JSON.parse(r.result);
+      if (obj && obj.pages && typeof obj.pages === 'object'){ PST = obj.pages; }
+      else if (obj && typeof obj === 'object'){
+        for (const k in obj){
+          const v = obj[k];
+          if (typeof k === 'string' && k.indexOf('|') > 0 && v && typeof v === 'object'){
+            const parts = k.split('|');
+            const L = pageList(parseInt(parts[0]));
+            const it = L[parseInt(parts[1])];
+            if (it && 'x' in v){ it.x = v.x; it.y = v.y; }
+          }
+        }
+      }
+      savePST(); renderAll();
+    } catch(_){}
+  };
+  r.readAsText(f);
+  e.target.value = '';
+};
+
+/* ------- تشغيل ------- */
+buildTabs();
+$('chromeBtn').onclick = ()=>{
+  const off = document.body.classList.toggle('chrome-off');
+  $('chromeLbl').textContent = off ? 'إظهار الشريط' : 'إخفاء الشريط';
+  try{ localStorage.setItem('lector_chrome', off ? '0' : '1'); }catch(_){}
+};
+try{ if (localStorage.getItem('lector_chrome') === '0'){ document.body.classList.add('chrome-off'); $('chromeLbl').textContent = 'إظهار الشريط'; } }catch(_){}
+document.addEventListener('click', e=>{
+  if (e.target.closest('.acard') || e.target.closest('.oa') || e.target.closest('.od') || e.target.closest('#ansAll')) return;
+  closeCards();
+});
+(function boot(){
+  const startMode = localStorage.getItem('lector_imode') === 't' ? 't' : 'n';
+  idxMode = startMode;
+  applyOrder(startMode, true);
+  renderAll();
+  PAGES.forEach(p=>{ const s = document.getElementById('p' + p); if (s) secObs.observe(s); });
+  const h = (location.hash||'').match(/^#p(\d+)/);
+  let p = h ? parseInt(h[1]) : -1;
+  if (PAGES.indexOf(p) < 0) p = -1;
+  let v = (p >= 0) ? tabOf(p) : localStorage.getItem('lector_iview');
+  if (['u1','u2','u3','u4'].indexOf(String(v)) < 0) v = 'u1';
+  showView(v, p >= 0 ? p : null);
+  function warm(k){
+    document.querySelectorAll('section.pg').forEach(sd=>{
+      if (tabOf(+sd.dataset.p) !== k) return;
+      sd.querySelectorAll('img[loading="lazy"]').forEach(im=>{
+        im.loading = 'eager';
+        if (im.decode) im.decode().catch(()=>{});
+      });
+    });
+  }
+  document.querySelectorAll('.tab').forEach(b=> b.addEventListener('pointerenter', ()=> warm(b.dataset.k)));
+  let warmQ = PAGES.slice();
+  const warmTick = ()=>{
+    for (let n = 0; n < 3 && warmQ.length; n++){
+      const sd = document.getElementById('p' + warmQ.shift());
+      if (sd) sd.querySelectorAll('img').forEach(im=>{
+        im.loading = 'eager';
+        if (im.decode) im.decode().catch(()=>{});
+      });
+    }
+    if (warmQ.length) setTimeout(warmTick, 70);
+  };
+  setTimeout(warmTick, 1200);
+})();
+window.addEventListener('hashchange', ()=>{
+  const h = (location.hash||'').match(/^#p(\d+)/);
+  if (h){ const p = parseInt(h[1]); if (p!==cur && PAGES.indexOf(p)>=0) go(p); }
+});
+</script>
+</body>
+</html>
